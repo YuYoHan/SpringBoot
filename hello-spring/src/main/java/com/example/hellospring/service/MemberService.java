@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
 public class MemberService {
 
     private final MemberRepositrory mr;
 
-    @Autowired
+//    @Autowired
     public MemberService(MemberRepositrory mr) {
         this.mr = mr;
     }
