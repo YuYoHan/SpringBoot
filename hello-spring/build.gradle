@@ -29,6 +29,10 @@ dependencies {
         exclude group : 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
+    // 자바는 DB랑 붙으려고 하면 jdbc 드라이버가 필수다!
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'mysql:mysql-connector-java' // MySql
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 tasks.named('test') {

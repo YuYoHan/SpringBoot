@@ -1,6 +1,6 @@
 package com.example.hellospring.service;
 
-import com.example.hellospring.repository.MemberRepositrory;
+import com.example.hellospring.repository.MemberRepository;
 import com.example.hellospring.repository.MemoryMemberRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ public class SpringConfig {
     }
 
     @Bean
-    public MemberRepositrory memberRepositrory() {
+    public MemberRepository memberRepositrory() {
         return new MemoryMemberRepository();
     }
 }
