@@ -30,6 +30,7 @@ public class MemoryMemberRepositoryTest {
         // Optional에서 값을 꺼낼 때는 get
         Member result = repositrory.findById(member.getId()).get();
         Assertions.assertThat(member).isEqualTo(result);
+        ;
     }
 
     @Test
