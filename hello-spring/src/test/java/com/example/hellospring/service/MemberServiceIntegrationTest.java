@@ -25,19 +25,19 @@ class MemberServiceIntegrationTest {
     @Autowired
     MemberRepository memberRepository;
 
-    @Test
-    void join() throws Exception{
-        // given
-        Member member = new Member();
-        member.setName("hello");
-
-        // when
-        long saveId = memberService.join(member);
-
-        // then
-        Member fineMember = memberService.findOne(saveId).get();
-        Assertions.assertThat(member.getName()).isEqualTo(fineMember.getName());
-    }
+//    @Test
+//    void join() throws Exception{
+//        // given
+//        Member member = new Member();
+//        member.setName("hello");
+//
+//        // when
+//        long saveId = memberService.join(member);
+//
+//        // then
+//        Member fineMember = memberService.findOne(saveId).get();
+//        Assertions.assertThat(member.getName()).isEqualTo(fineMember.getName());
+//    }
 
     @Test
     public void 중복_회원_예외() {

@@ -42,4 +42,9 @@ public class MemberController {
         model.addAttribute("members", members);
         return "members/memberList";
     }
+
+    @GetMapping("/members/signUp")
+    public String saveForm() {
+        return "/members/signUp";
+    }
 }

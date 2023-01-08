@@ -8,3 +8,4 @@ create table test_member (
 
 insert into test_member (member_name) values ("apple");
 select * from test_member;
+drop table  test_member;
