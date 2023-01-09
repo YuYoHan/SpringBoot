@@ -7,7 +7,7 @@ create table test_member (
 );
 
 insert into test_member (member_name) values ("apple");
-select * from test_member;
+select * from user;
 drop table  test_member;
 
 create table user(
@@ -15,3 +15,5 @@ create table user(
     userPw varchar(300) not null,
     userName varchar(300) not null
 );
+
+insert into user values ("apple", "zxzz12", "김사과");

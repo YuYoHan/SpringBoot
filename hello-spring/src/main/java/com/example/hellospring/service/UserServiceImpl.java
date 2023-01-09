@@ -4,7 +4,9 @@ import com.example.hellospring.domain.UserDTO;
 import com.example.hellospring.mapper.UserMapper;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService{
 
     @Setter(onMethod_ = @Autowired)
@@ -17,7 +19,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDTO login(String userId, String userPw) {
-        UserDTO user = mapper.login(userId, userPw);
-        return user;
+        UserDTO loginUser = mapper.login(userId, userPw);
+        return loginUser;
     }
 }

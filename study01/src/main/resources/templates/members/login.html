@@ -11,9 +11,9 @@
 <div class="wrapper">
     <h1>login</h1>
 
-    <form id="login" action="/members/login" name="login" method="post">
-        <input id="userId" type="text" placeholder="아이디를 입력하세요" value="${userId}">
-        <input id="userPw" type="password" placeholder="비밀번호를 입력하세요" value="${userPw}">
+    <form id="login" action="/members/login" name="login" method="post" >
+        <input id="userId" type="text" placeholder="아이디를 입력하세요" value="${cookie_value}">
+        <input id="userPw" type="password" placeholder="비밀번호를 입력하세요">
         <button class="btnLogin" type="submit" value="로그인" >로그인 </button>
     </form>
     <div>
