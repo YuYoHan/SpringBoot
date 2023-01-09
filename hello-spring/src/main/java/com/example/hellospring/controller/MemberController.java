@@ -1,18 +1,32 @@
 package com.example.hellospring.controller;
 
 import com.example.hellospring.domain.Member;
+import com.example.hellospring.domain.UserDTO;
 import com.example.hellospring.service.MemberService;
+import com.example.hellospring.service.UserService;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@Log4j
 public class MemberController {
+
     private final MemberService memberService;
+    @Setter(onMethod_ = @Autowired)
+    private UserService userService;
 
 
     @Autowired
@@ -43,8 +57,34 @@ public class MemberController {
         return "members/memberList";
     }
 
+
     @GetMapping("/members/signUp")
     public String saveForm() {
         return "/members/signUp";
+    }
+
+    @GetMapping("/members/login")
+    public String loginForm() {
+        return "/members/login";
+    }
+
+    @PostMapping("/members/signUp")
+    public String join(UserDTO user, HttpServletResponse resp) {
+        if(userService.join(user)) {
+            Cookie joinId = new Cookie("joinId", user.getUserId());
+            joinId.setMaxAge(300);
+            resp.addCookie(joinId);
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping("/members/login")
+    public String login(String userId, String userPw, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        UserDTO user = userService.login(userId, userPw);
+        if(user != null) {
+            session.setAttribute("loginUser", user.getUserId());
+        }
+        return "home";
     }
 }

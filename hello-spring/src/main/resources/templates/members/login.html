@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link href="/css/common.css" rel="stylesheet">
+    <link href="/css/login.css
+" rel="stylesheet">
 </head>
 <body>
+<div class="wrapper">
+    <h1>login</h1>
 
+    <form id="login" action="/members/login" name="login" method="post">
+        <input id="userId" type="text" placeholder="아이디를 입력하세요">
+        <input id="userPw" type="password" placeholder="비밀번호를 입력하세요">
+        <button class="btnLogin" type="submit" value="로그인" >로그인 </button>
+    </form>
+    <div>
+        <a href="#" class="lost_pw">비밀번호를 잊으셨나요?</a>
+    </div>
+</div>
+<script src="/js/login.js"></script>
 </body>
 </html>
