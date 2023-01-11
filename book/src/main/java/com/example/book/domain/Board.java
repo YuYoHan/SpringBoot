@@ -1,11 +1,15 @@
 package com.example.book.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.*;
 import java.util.Date;
 
+@Getter
+@Setter
+@ToString(exclude = "member")
 @Entity
 @Table(name = "board")
 public class Board {
@@ -15,8 +19,22 @@ public class Board {
     private String title;
     private String writer;
     private String content;
-    private Date createDate;
-    private long cnt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(updatable = false)
+    private Date createDate = new Date();
+
+    @Column(updatable = false)
+    private long cnt =0l;
+
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID", nullable = false, updatable = false)
+    private Member member;
+
+    public void setMember(Member member) {
+        this.member = member;
+        member.getBoardList().add(this);
+    }
 
     public long getSeq() {
         return seq;
