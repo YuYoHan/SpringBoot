@@ -8,4 +8,10 @@
             select * from board where 0 < boardNum order by  boardNum desc limit  0,10
         ]]>
     </select>
+    <insert id="insert">
+        insert into board (boardTitle, boardContents, userId) values (#{boardTitle}, #{boardContents}, #{userId})
+    </insert>
+    <select id="getDetail" resultType="com.example.study01.domain.BoardDTO">
+        select * from board where boardNum=#{boardNum}
+    </select>
 </mapper>

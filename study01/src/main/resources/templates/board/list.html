@@ -60,22 +60,34 @@
             <div class="table-wrapper" style="clear: both">
                 <table>
                     <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>작성시간</th>
-                        <th>수정시간</th>
-                    </tr>
+                        <tr>
+                            <th style="width: 10%">번호</th>
+                            <th style="width: 40%">제목</th>
+                            <th style="width: 15%">작성자</th>
+                            <th style="width: 35%;">작성시간</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <!-- th:block은 반복문이나 조건문 돌릴 때 자주사용한다.-->
+                        <th:block th:if="${list} != null and ${list.size()} >0">
+                            <!--list : ${list} 이렇게하면 model에 입력했던 것을 내가 정한 이름으로 줄 수 있다.
+                                예를들어, BoardController에 list로 주어진 모델에 getList로 board를 볼 수 있게
+                                넣어놨다. 모델 키값은 현재 list에서 list : ${키값}으로 다시 list를 줬지만
+                                다른 이름으로도 할 수 있다.-->
+                            <th:block th:each="list : ${list}">
+                                <tr>
+                                    <td>${list.boardNum}</td>
+                                    <td><a th:href="@{list.boardNum}" >${list.boardTitle}</a></td>
+                                    <td>${list.userId}</td>
+                                    <td>${list.regDate}
+                                        <th:block th:if="${list.regDate} != list.updateDate">
+                                            (${list.updateDate})
+                                        </th:block>
+                                    </td>
+
+                                </tr>
+                            </th:block>
+                        </th:block>
                     </tbody>
                 </table>
             </div>
@@ -114,5 +126,24 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+<script>
+    const pageForm = $("#pageForm");
+    // const pageForm = document.pageForm;
+    $(".get").on("click", function (e) {
+        // e(애벤트)의 기본 작동 막기
+        e.preventDefault();
+        // 선택한 요소의 속성의 값을 가져온다.
+        let boardNum = $(this).attr("href");
+        //              <input type='hidden' name='boardNum' value='542780'
+        pageForm.append("<input type='hidden' name='boardNum' value='"+boardNum+"'>");
+
+        // jQuery 요소 일때는
+        pageForm.attr("action","/board/get")
+
+        // 바닐라 요소 일 때는
+        // pageForm.setAttribute("action", "/board/get")
+        pageForm.submit();
+    })
+</script>
 </body>
 </html>

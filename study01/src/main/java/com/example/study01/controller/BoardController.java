@@ -29,11 +29,14 @@ public class BoardController {
     }
 
     @PostMapping("/register")
+    // Model model도 request로 넘겨주는 것이라
+    // redirect면 다 날라간다.
+    // 이럴때 RedirectAttributes 매개변수를 사용한다.
     // RedirectAttributes를 사용하는 이유는 등록 작업이 끝난 후 다시 목록 화면으로
     // 이동하기 위함이다. 추가적으로 새롭게 등록된 게시물의 번호를 같이 전달하기 위해서 이용한다.
     public String register(BoardDTO board, RedirectAttributes rttr) {
         log.info("register : " + board);
-        service.register(board);
+        service.regist(board);
         // 데이터가 post 방식으로 전달된다.
         // 데이터가 한번만 사용된다.
         rttr.addFlashAttribute("result : " + board.getBoardNum());

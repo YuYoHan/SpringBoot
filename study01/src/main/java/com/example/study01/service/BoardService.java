@@ -5,7 +5,7 @@ import com.example.study01.domain.BoardDTO;
 import java.util.List;
 
 public interface BoardService {
-    void register(BoardDTO board);
+    void regist(BoardDTO board);
     BoardDTO get(long boardNum);
     boolean modify(BoardDTO board);
     boolean remove(long boardNum);

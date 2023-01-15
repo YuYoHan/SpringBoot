@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="shortcut icon" href="#">
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <style>
+        #banner input, #banner select, #banner option {
+            color: #000000;
+        }
+
+        input:not(.button), textarea {
+            border: 1px solid black !important;
+            color: #000000 !important;
+        }
+
+        #banner .write_area input::placeholder {
+            color: #ccc !important;
+        }
+
+        .write_area {
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        .write_area input {
+            margin-bottom: 32px;
+        }
+
+        .write_area > form > div {
+            margin-bottom: 32px;
+        }
+
+        .write_area > form > div:nth-of-type(odd) > h4 {
+            float: left;
+        }
+
+        .write_area > form > div:nth-of-type(odd) > input {
+            float: right;
+            width: 70%;
+        }
+
+        form h4 {
+            line-height: 3.25rem;
+        }
+
+        hr {
+            clear: both;
+        }
+
+        .replyForm input, .replyForm textarea {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="is-preload">
+<!-- header -->
+<header id="header" class="alt">
+    <a class="logo" href="/">Boot<span>Board</span></a>
+    <nav id="nav">
+        <ul>
+            <th:block th:if="${loginUser == null}">
+                <li><a th:action="@{/}">Home</a></li>
+                <li><a th:action="@{/members/signUp.html}">Join</a></li>
+                <li><a th:action="@{/members/login.html}">Login</a></li>
+            </th:block>
+            <th:block th:unless="${loginUser == null}">
+                <li>${loginUser}님 환영합니다.</li>
+                <li class="current"><a href="/">Home</a></li>
+                <li><a href="/board/list">Board</a></li>
+                <li><a href="/board/logout">Logout</a></li>
+                <li></li>
+            </th:block>
+        </ul>
+    </nav>
+</header>
+<!-- Banner -->
+<div id="banner">
+    <div class="wrapper style1 special">
+        <div class="inner">
+            <h1 class="heading alt">Board</h1>
+            <p>${board.boardNum}</p>
+            <a href="/board/list" class="button primary"
+               style="float: right; border-bottom: 1px solid #fff; border-radius: 0px; border-top: 1px solid #fff">목록
+                보기 </a>
+            <br/>
+            <br/>
+            <br/>
+            <div class="write_area" style="clear: both">
+                <form name="boardForm" method="post" action="/board/remove">
+                    <div class="col-12">
+                        <h4>제목</h4>
+                        <label>
+                            <input name="boardTitle" type="text" placeholder="Title"/>
+                        </label>
+                    </div>
+                    <div class="col-12">
+                        <h4>내용</h4>
+                        <label>
+                            <textarea name="boardContents" placeholder="Contents" rows="10"></textarea>
+                        </label>
+                    </div>
+                    <hr/>
+                    <div>
+                        <h4>작성자</h4>
+                        <label>
+                            <input name="userId" type="text" value="${loginUser}" readonly/>
+                        </label>
+                    </div>
+                    <hr/>
+                    <div>
+                        <input type="submit" value="등록" class="button primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

@@ -17,13 +17,13 @@ public class BoardServiceImpl implements BoardService{
     private BoardMapper mapper;
 
     @Override
-    public void register(BoardDTO board) {
-
+    public void regist(BoardDTO board) {
+        mapper.insert(board);
     }
 
     @Override
     public BoardDTO get(long boardNum) {
-        return null;
+        return mapper.getDetail(boardNum);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public List<BoardDTO> getList() {
-        return null;
+        return mapper.getList();
     }
 }
