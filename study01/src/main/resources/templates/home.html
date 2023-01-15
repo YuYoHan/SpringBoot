@@ -3,19 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="/css/main.css" rel="stylesheet" />
 </head>
-<body>
-<div class="container">
-    <div>
-        <h1>Hello Spring</h1>
-        <p>회원 기능</p>
-        <p>
-            <a href="/members/signUp">회원 가입</a>
-            <a href="/members/userList">회원 목록</a>
-            <a href="/members/login">로그인</a>
-        </p>
+<body class="is-preload">
+    <!-- Header -->
+    <header id="header" class="alt" >
+        <a class="logo" href="/">Boot<span>Board</span></a>
+        <nav id="nav">
+            <ul>
+                <th:block th:if="${loginUser == null}">
+                    <li><a th:action="@{/}">Home</a> </li>
+                    <li><a th:action="@{/members/signUp.html}">Join</a> </li>
+                    <li><a th:action="@{/members/login.html}">Login</a> </li>
+                </th:block>
+                <th:block th:unless="${loginUser == null}">
+                    <li>${loginUser}님 환영합니다.</li>
+                    <li class="current"><a href="/">Home</a> </li>
+                    <li><a href="/board/list">Board</a> </li>
+                    <li><a href="/board/logout">Logout</a> </li>
+                    <li></li>
+                </th:block>
+            </ul>
+        </nav>
+    </header>
+    <!-- Banner -->
+    <div id="banner">
+        <div class="wrapper style1 special">
+            <div class="inner">
+                <h1 class="heading alt">스프링 게시판</h1>
+                <p>스프링 최종 예제</p>
+                <div class="image fit special">
+                    <img src="https://images.unsplash.com/photo-1657497850516-de7b59ac243b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80" alt="" />
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+
+    <!-- Scripts -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.dropotron.min.js"></script>
+    <script src="/js/browser.min.js"></script>
+    <script src="/js/breakpoints.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+
+
 
 </body>
 </html>

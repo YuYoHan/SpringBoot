@@ -8,7 +8,5 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     List<BoardDTO> getList();
-    void insert(BoardDTO board);
-    BoardDTO getDetail(long boardNum);
 
 }

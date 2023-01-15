@@ -3,6 +3,7 @@ package com.example.study01.controller;
 import com.example.study01.domain.UserDTO;
 import com.example.study01.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @AllArgsConstructor
+@Log4j2
 public class UserController {
 
     private UserService service;
@@ -47,7 +49,6 @@ public class UserController {
         UserDTO user = service.login(userId, userPw);
         if(user != null) {
             session.setAttribute("userId", user.getUserId());
-            session.setAttribute("userPw", user.getUserPw());
 //            model.addAttribute("userId", session.getAttribute("userId"));
 //            model.addAttribute("userPw", session.getAttribute("userPw"));
             Cookie[] cookies = req.getCookies();
@@ -55,7 +56,10 @@ public class UserController {
             for(Cookie c : cookies) {
                 model.addAttribute("cookie_name", c.getName());
                 model.addAttribute("cookie_value", c.getValue());
+                log.info(c.getName());
+                log.info(c.getValue());
             }
+            model.addAttribute("loginUser", user.getUserId());
 
         }
         return "home";

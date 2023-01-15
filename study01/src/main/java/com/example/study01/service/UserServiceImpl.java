@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UserSerivceImpl implements UserService{
+public class UserServiceImpl implements UserService{
 
     private UserMapper mapper;
 
