@@ -13,4 +13,9 @@ public class BoardController {
 
     @GetMapping("/list")
     public void list() {}
+
+    @GetMapping("/regist")
+    public void regist() {}
+
+
 }
