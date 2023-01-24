@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="shortcut icon" href="#">
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <style>
+        #banner input, #banner select, #banner option {
+            color: #000000;
+        }
+
+        select {
+            width: 15%;
+            text-align: center;
+            padding: 20px;
+            display: inline;
+        }
+
+        #keyword {
+            width: 55%;
+            display: inline;
+        }
+
+        #keyword + a {
+            border: 1px solid #fff;
+        }
+    </style>
+</head>
+<body class="is-preload">
+<!-- header -->
+<header id="header" class="alt">
+    <a class="logo" href="/">Boot<span>Board</span></a>
+    <nav id="nav">
+        <ul>
+            <th:block th:if="${loginUser == null}">
+                <li><a th:action="@{/}">Home</a> </li>
+                <li><a th:action="@{/user/signUp.html}">Join</a> </li>
+                <li><a th:action="@{/user/login.html}">Login</a> </li>
+            </th:block>
+            <th:block th:unless="${loginUser == null}">
+                <li><span th:text="${loginUser}"></span>님 어서오세요</li>
+                <li class="current"><a href="/">Home</a> </li>
+                <li><a href="/board/list">Board</a> </li>
+                <li><a href="/board/logout">Logout</a> </li>
+                <li></li>
+            </th:block>
+        </ul>
+    </nav>
+</header>
+
+<!-- Banner -->
+<div id="banner">
+    <div class="wrapper style1 special">
+        <div class="inner">
+            <h1 class="heading alt">Board</h1>
+            <p>게시판 목록</p>
+            <a href="#" class="button primary" style="float: right; border-bottom: 1px solid #fff; border-radius: 0px; border-top: 1px solid #fff">글 등록 </a>
+            <div class="table-wrapper" style="clear: both">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성시간</th>
+                        <th>수정시간</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <form>
+                <div>
+                    <select name="type">
+                        <option value="">검색</option>
+                        <option value="">제목</option>
+                        <option value="">내용</option>
+                        <option value="">작성자</option>
+                        <option value="">제목 또는 내용</option>
+                        <option value="">제목 또는 작성자</option>
+                        <option value="">제목 또는 내용 또는 작성자</option>
+                    </select>
+                    <input type="text" name="keyword" id="keyword">
+                    <a href="#" class="button primary">검색</a>
+                </div>
+            </form>
+            <div>
+                <code>&lt;</code>
+                <code>1</code>
+                <code>2</code>
+                <code>3</code>
+                <code>4</code>
+                <code>5</code>
+                <code>&gt;</code>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

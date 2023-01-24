@@ -12,12 +12,12 @@
   <nav id="nav">
     <ul>
       <th:block th:if="${loginUser == null}">
-        <li><a th:action="@{/}">Home</a> </li>
-        <li><a th:action="@{/members/signUp.html}">Join</a> </li>
-        <li><a th:action="@{/members/login.html}">Login</a> </li>
+        <li><a th:href="@{/}">Home</a> </li>
+        <li><a th:href="@{/user/signUp}">Join</a> </li>
+        <li><a th:href="@{/user/login}">Login</a> </li>
       </th:block>
       <th:block th:unless="${loginUser == null}">
-        <li>${loginUser}님 환영합니다.</li>
+        <li><span th:text="${loginUser}"></span>님 어서오세요</li>
         <li class="current"><a href="/">Home</a> </li>
         <li><a href="/board/list">Board</a> </li>
         <li><a href="/board/logout">Logout</a> </li>
