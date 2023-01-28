@@ -9,5 +9,8 @@ import java.util.List;
 public interface BoardMapper {
     List<BoardDTO> getList();
     void insert(BoardDTO board);
+    BoardDTO getDetail(long boardNum);
+    int getMaxBoardNum(String userId);
 
+    int getTotal();
 }

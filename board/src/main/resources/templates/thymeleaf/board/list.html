@@ -90,6 +90,12 @@
                                 <th:block th:if="${list.regDate} != list.updateDate">
                                     (${list.updateDate})
                                 </th:block>
+                            </td>
+                        </tr>
+                    </th:block>
+                    <th:block th:unless="${list} != null and ${list.size()}>0">
+                        <tr>
+                            <td colspan="5">작성된 게시글이 없습니다.</td>
                         </tr>
                     </th:block>
                     </tbody>
@@ -110,6 +116,12 @@
                     <a href="#" class="button primary">검색</a>
                 </div>
             </form>
+            <div class="pagination center">
+                <th:block th:if="${pageMaker.prev}">
+                    <code>&lt</code>
+                </th:block>
+                <span th:each="s"
+            </div>
             <div>
                 <code>&lt;</code>
                 <code>1</code>

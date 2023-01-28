@@ -27,7 +27,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public BoardDTO get(long boardNum) {
-        return null;
+        return mapper.getDetail(boardNum);
     }
 
     @Override
@@ -38,5 +38,15 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public boolean remove(long boardNum) {
         return false;
+    }
+
+    @Override
+    public int getMaxBoardNum(String userId) {
+        return mapper.getMaxBoardNum(userId);
+    }
+
+    @Override
+    public int count() {
+        return mapper.getTotal();
     }
 }
