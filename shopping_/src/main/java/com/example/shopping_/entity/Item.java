@@ -1,6 +1,6 @@
 package com.example.shopping_.entity;
 
-import com.example.shopping_.constant.ItemSellStauts;
+import com.example.shopping_.constant.ItemSellStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,7 +22,7 @@ public class Item {
     // 상품 상세 설명
     private String itemDetail;
     // 상품 판매 상태
-    private ItemSellStauts itemSellStauts;
+    private ItemSellStatus itemSellStatus;
     // 등록 시간
     // LocalDateTime 타입은 현재 로컬 컴퓨터의 날짜와 시간을 반환
     private LocalDateTime regTime;
