@@ -1,6 +1,7 @@
 package com.example.board.controller;
 
 import com.example.board.domain.BoardDTO;
+import com.example.board.domain.Criteria;
 import com.example.board.domain.PageDTO;
 import com.example.board.service.BoardService;
 import lombok.AllArgsConstructor;
@@ -19,9 +20,9 @@ public class BoardController {
     private BoardService service;
 
     @GetMapping("/list")
-    public void list(int pageNum, Model model) {
+    public void list(Criteria cri, Model model) {
         model.addAttribute("list", service.getList());
-        model.addAttribute("pageMaker",new PageDTO(service.count(), pageNum));
+        model.addAttribute("pageMaker",new PageDTO(service.count(cri), cri));
     }
 
     @GetMapping("/regist")

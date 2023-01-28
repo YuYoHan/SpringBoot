@@ -1,6 +1,7 @@
 package com.example.board.service;
 
 import com.example.board.domain.BoardDTO;
+import com.example.board.domain.Criteria;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface BoardService {
     boolean modify(BoardDTO board);
     public boolean remove(long boardNum);
 
-    int count();
+    int count(Criteria cri);
 }

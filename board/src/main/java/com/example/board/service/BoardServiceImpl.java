@@ -1,6 +1,7 @@
 package com.example.board.service;
 
 import com.example.board.domain.BoardDTO;
+import com.example.board.domain.Criteria;
 import com.example.board.mapper.BoardMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -46,7 +47,7 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public int count() {
-        return mapper.getTotal();
+    public int count(Criteria cri) {
+        return mapper.getTotal(cri);
     }
 }
