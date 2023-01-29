@@ -101,24 +101,26 @@
                     </tbody>
                 </table>
             </div>
-            <form id="searchForm">
+            <form id="searchForm" action="/board/list">
                 <div>
                     <select name="type">
                         <option value="">검색</option>
-                        <option value="">제목</option>
-                        <option value="">내용</option>
-                        <option value="">작성자</option>
-                        <option value="">제목 또는 내용</option>
-                        <option value="">제목 또는 작성자</option>
-                        <option value="">제목 또는 내용 또는 작성자</option>
+                        <option value="T">제목</option>
+                        <option value="C">내용</option>
+                        <option value="W">작성자</option>
+                        <option value="TC">제목 또는 내용</option>
+                        <option value="TW">제목 또는 작성자</option>
+                        <option value="TCW">제목 또는 내용 또는 작성자</option>
                     </select>
                     <input type="text" name="keyword" id="keyword">
                     <a href="#" class="button primary">검색</a>
                 </div>
+                <input type="hidden" value="1" name="pageNum">
+                <input type="hidden" value="10" name="amount">
             </form>
             <div class="pagination center">
                 <th:block th:if="${pageMaker.prev}">
-                    <code>&lt</code>
+                    <a class="changePage" th:href="@{pageMaker.startPage -1}"><code>&lt</code></a>
                 </th:block>
                 <!--
                     여기에서 페이지 할것을 구현해야 합니다.
@@ -138,8 +140,9 @@
         </div>
     </div>
 </div>
-<form name="pageForm" id="pageForm">
-    <input type="hidden">
+<form name="pageForm" id="pageForm" action="/board/list">
+    <input type="hidden" th:value="${pageMaker.cri.pageNum}" name="pageNum" />
+    <input type="hidden" th:value="${pageMaker.cri.amount}" name="amount" />
 </form>
 <!-- Scripts -->
 <script src="/js/jquery.min.js"></script>
@@ -150,6 +153,7 @@
 <script src="/js/main.js"></script>
 <script>
     const pageForm = $("#pageForm");
+    const searchForm = $("#searchForm")
     // const pageForm = document.pageForm;
     $(".get").on("click", function (e) {
         // e(애벤트)의 기본 작동 막기
@@ -165,6 +169,31 @@
         // 바닐라 요소 일 때는
         // pageForm.setAttribute("action", "/board/get")
         pageForm.submit();
+    })
+    $(".changePage").on("click", function (e) {
+        e.preventDefault();
+        let pageNum = $(this).attr("href");
+        pageForm.find("input[name='pageNum']").val(pageNum);
+        pageForm.submit();
+    })
+    $("#searchForm a").on("click", function (e) {
+        // 검색조건을 아무것도 선택을 안했을 때
+        /*
+        *   if("") → if(false)
+        * */
+        if(!searchForm.find("option:selected").val()) {
+            alert("검색 기준을 선택하세요")
+            return false;
+        }
+        if(!searchForm.find("input[name='keyword']").val()) {
+            alert("키워드를 선택하세요")
+            return false;
+        }
+        if(searchForm.find("input[name='keyword']").val().length < 2) {
+            alert("두 글자 이상 입력하세요")
+            return false;
+        }
+        searchForm.submit();
     })
 </script>
 </body>

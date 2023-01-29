@@ -9,12 +9,11 @@ public class PageDTO {
     private int realEnd;
     private int total;
     private boolean prev, next;
-    private int pageNum;
 
+    private Criteria cri;
     public PageDTO(int total, Criteria cri) {
         int pageNum = cri.getPageNum();
         this.total = total;
-        this.pageNum = pageNum;
 
         // 페이지가 10이면 10 / 10.0을 해서 1이 나온다.
         // 그런 다음 * 10을 해줘서 10이된다. 10은 마지막 페이지다.

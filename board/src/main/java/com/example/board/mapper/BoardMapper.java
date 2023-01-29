@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-    List<BoardDTO> getList();
+    List<BoardDTO> getList(Criteria cri);
     void insert(BoardDTO board);
     BoardDTO getDetail(long boardNum);
     int getMaxBoardNum(String userId);

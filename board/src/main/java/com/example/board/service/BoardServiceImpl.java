@@ -16,9 +16,9 @@ public class BoardServiceImpl implements BoardService{
     private BoardMapper mapper;
 
     @Override
-    public List<BoardDTO> getList() {
-        log.info(mapper.getList());
-        return mapper.getList();
+    public List<BoardDTO> getList(Criteria cri) {
+        log.info(mapper.getList(cri));
+        return mapper.getList(cri);
     }
 
     @Override

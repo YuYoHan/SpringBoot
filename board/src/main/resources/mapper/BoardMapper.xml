@@ -5,7 +5,7 @@
     <select id="getList" resultType="com.example.board.domain.BoardDTO">
         <!-- 0 <boardNum하면 과로 처리하지만 CDATA안에 써주면 제대로 사용 가능하다-->
         <![CDATA[
-            select * from board where 0<boardNum order by  boardNum desc limit  0,10
+            select * from board where 0<boardNum order by  boardNum desc limit #{startrow}, #{amount}
         ]]>
     </select>
     <insert id="insert">
