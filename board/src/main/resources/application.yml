@@ -1,0 +1,31 @@
+server:
+  port: 9090
+
+spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  freemarker:
+    cache: false
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/web0315
+    username: root
+    password: 1234
+
+
+
+  thymeleaf:
+    prefix:  classpath:templates/thymeleaf/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: false
+  mvc:
+    ignore-default-model-on-redirect: false
+
+logging:
+  config: classpath:log4j2.yml
