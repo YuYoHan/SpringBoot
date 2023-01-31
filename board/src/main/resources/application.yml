@@ -28,4 +28,4 @@ spring:
     ignore-default-model-on-redirect: false
 
 logging:
-  config: classpath:log4j2.yml
+  config: classpath:log4j2.xml
