@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/*")
@@ -27,5 +29,39 @@ public class ThymeleafController {
 
         model.addAttribute("item", item);
         return "/ex02";
+    }
+
+    @GetMapping("ex03")
+    public String ex03(Model model) {
+        List<ItemDTO> itemDTOList = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            ItemDTO item = new ItemDTO();
+            item.setItemDetail("상품 상세 설명" + i);
+            item.setItemNm("상품 " + i);
+            item.setPrice(10000 * i);
+            item.setRegTime(LocalDateTime.now());
+
+            itemDTOList.add(item);
+        }
+        model.addAttribute("itemList", itemDTOList);
+        return "/ex03";
+    }
+
+    @GetMapping("ex04")
+    public String ex04(Model model) {
+        List<ItemDTO> itemDTOList2 = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            ItemDTO item = new ItemDTO();
+            item.setItemDetail("상품 상세 설명" + i);
+            item.setItemNm("상품 " + i);
+            item.setPrice(10000 * i);
+            item.setRegTime(LocalDateTime.now());
+
+            itemDTOList2.add(item);
+        }
+        model.addAttribute("itemList", itemDTOList2);
+        return "/ex04";
     }
 }
