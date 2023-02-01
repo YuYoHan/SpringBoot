@@ -64,4 +64,27 @@ public class ThymeleafController {
         model.addAttribute("itemList", itemDTOList2);
         return "/ex04";
     }
+
+    @GetMapping("ex05")
+    public String ex05(Model model) {
+        List<ItemDTO> itemDTOList3 = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            ItemDTO item = new ItemDTO();
+            item.setItemDetail("상품 상세 설명" + i);
+            item.setItemNm("상품 " + i);
+            item.setPrice(10000 * i);
+            item.setRegTime(LocalDateTime.now());
+
+            itemDTOList3.add(item);
+        }
+        model.addAttribute("itemList", itemDTOList3);
+        return "/ex05";
+    }
+
+    @GetMapping("ex06")
+    public String ex06() {
+        return "/ex06";
+    }
+
 }
