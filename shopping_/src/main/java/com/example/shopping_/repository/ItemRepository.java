@@ -2,6 +2,8 @@ package com.example.shopping_.repository;
 
 import com.example.shopping_.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -17,5 +19,10 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     // OrderBy
     List<Item> findByPriceLessThanOrderByPriceDesc(Integer price);
 
-
+    // @Query 어노테이션 안에 JPQL로 작성한 쿼리문을 넣어줍니다.
+    // from 뒤에는 엔티티 클래스로 작성한 Item을 지정해주었고, Item으로부터 데이터를 select하겟다는 의미입니다.
+    @Query("select i from Item i where i.itemDetail like %:itemDetail% order by i.price desc")
+    // 파라미터 @Param 어노테이션을 이용하여 파라미터로 넘어온 값을 JPQL에 들어갈 변수로 지정해줄 수 있습니다.
+    // 현재는 itemDetail 변수를 "like % %" 사이에 ":itemDetail"로 값이 들어가도록 작성했습니다.
+    List<Item> findByItemDetail(@Param("itemDetail") String itemDetail);
 }
