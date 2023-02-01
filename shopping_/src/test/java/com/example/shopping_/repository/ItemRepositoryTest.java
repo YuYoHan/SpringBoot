@@ -2,6 +2,9 @@ package com.example.shopping_.repository;
 
 import com.example.shopping_.constant.ItemSellStatus;
 import com.example.shopping_.entity.Item;
+import com.example.shopping_.entity.QItem;
+import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.apache.juli.logging.Log;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,6 +24,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class ItemRepositoryTest {
     @Autowired
     ItemRepository itemRepository;
+
+    // 영속성 컨텍스트를 이용하기 위해 @PersistenceContext 어노테이션을 이용해
+    // EntityManager 빈을 주입합니다.
+    @PersistenceContext
+    // Entity를 관리하는 역할을 수행하는 클래스
+    // EntityManager 내부에 영속성 컨텍스트를 이용하여 관리한다.
+    // Transaction 단위를 수행할 때마다 생성된다.
+    // 요청 시 생성되며 Transaction 후에는 close()되어야 한다.
+    EntityManager em;
+
 
     @Test
     @DisplayName("상품 저장 테스트")
@@ -107,6 +122,31 @@ class ItemRepositoryTest {
     public void findByItemDetailTest() {
         this.createItemList();
         List<Item> itemList = itemRepository.findByItemDetail("테스트 상품 상세 설명");
+        for (Item item: itemList
+             ) {
+            System.out.println(item.toString());
+        }
+    }
+
+    @Test
+    @DisplayName("Querydsl 조회 테스트1")
+    public void queryDslTest() {
+        this.createItemList();
+        // JPAQueryFactory를 이용하여 쿼리를 동적으로 생성합니다.
+        // 생성자의 파라미터로는 EntityManager 객체를 넣어줍니다.
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        // Querydsl을 통해 쿼리를 생성하기 위해 플러그인을 통해 자동으로 생성된 QItem 객체를 이용합니다.
+        QItem qItem = QItem.item;
+        // 자바 소스코드지만 SQL문과 비슷하게 소스를 작성할 수 있습니다.
+        JPAQuery<Item> query = queryFactory.selectFrom(qItem)
+                .where(qItem.itemSellStatus.eq(ItemSellStatus.SELL))
+                .where(qItem.itemDetail.like("%" + "테스트 상품 상세 설명" + "%"))
+                .orderBy(qItem.price.desc());
+
+        // JPAQuery 메소드 중 하나인 fetch를 이용해서 쿼리 결과를 리스트로 반환합니다.
+        // fetch() 메소드 실행 시점에 쿼리문이 실행됩니다.
+        List<Item> itemList = query.fetch();
+
         for (Item item: itemList
              ) {
             System.out.println(item.toString());
