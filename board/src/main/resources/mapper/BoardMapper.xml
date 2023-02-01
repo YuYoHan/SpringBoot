@@ -4,20 +4,30 @@
 <mapper namespace="com.example.board.mapper.BoardMapper">
     <select id="getList" resultType="com.example.board.domain.BoardDTO">
         <!-- 0 <boardNum하면 과로 처리하지만 CDATA안에 써주면 제대로 사용 가능하다-->
+
+    select * from board where
+            <include refid="cri"/>
         <![CDATA[
-            select * from board where 0<boardNum order by  boardNum desc limit #{startrow}, #{amount}
+            0 < boardNum order by  boardNum desc limit #{startrow}, #{amount}
         ]]>
     </select>
     <insert id="insert">
-        insert into board (boardTitle, boardContents, userId) values (#{boardTitle}, #{boardContents}, #{userId})
+        insert into board (boardTitle, boardContents, userId)
+        values (#{boardTitle}, #{boardContents}, #{userId})
     </insert>
     <select id="getDetail" resultType="com.example.board.domain.BoardDTO">
-        select * from board where boardNum=#{boardNum}
+        select *
+        from board
+        where boardNum = #{boardNum}
     </select>
     <select id="getMaxBoardNum" resultType="_int">
-        select max(boardNum) from board where userId=#{userId}
-    </select> 
+        select max(boardNum)
+        from board
+        where userId = #{userId}
+    </select>
     <select id="getTotal" resultType="_int">
-        select count(*) from board where boardNum > 0;
+        select count(*)
+        from board
+        where boardNum > 0;
     </select>
 </mapper>

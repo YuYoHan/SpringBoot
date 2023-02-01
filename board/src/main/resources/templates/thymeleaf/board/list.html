@@ -143,6 +143,8 @@
 <form name="pageForm" id="pageForm" action="/board/list">
     <input type="hidden" th:value="${pageMaker.cri.pageNum}" name="pageNum" />
     <input type="hidden" th:value="${pageMaker.cri.amount}" name="amount" />
+    <input type="hidden" th:value="${pageMaker.cri.type}" name="type" />
+    <input type="hidden" th:value="${pageMaker.cri.keyword}" name="keyword" />
 </form>
 <!-- Scripts -->
 <script src="/js/jquery.min.js"></script>

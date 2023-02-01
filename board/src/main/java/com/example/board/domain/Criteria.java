@@ -29,4 +29,11 @@ public class Criteria {
         this.pageNum = pageNum;
         this.startrow = (this.pageNum -1) * this.amount;
     }
+
+
+    public String[] getTypeArr() {
+        // type이 null이라면 return {}
+        // type에 "TC"가 있다면 return {"T", "C"}
+        return type == null ? new String[] {} : type.split("");
+    }
 }
