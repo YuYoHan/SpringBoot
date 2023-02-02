@@ -11,13 +11,13 @@
         <a class="logo" href="/">Boot<span>Board</span></a>
         <nav id="nav">
             <ul>
-                <th:block th:if="${loginUser == null}">
+                <th:block th:if="${loginUser.getUserId() == null}">
                     <li><a th:action="@{/}">Home</a> </li>
                     <li><a th:action="@{/members/signUp.html}">Join</a> </li>
                     <li><a th:action="@{/members/login.html}">Login</a> </li>
                 </th:block>
-                <th:block th:unless="${loginUser == null}">
-                    <li>${loginUser}님 환영합니다.</li>
+                <th:block th:unless="${loginUser.getUserId() == null}">
+                    <li><span th:text="${loginUser.getUserId()}"/></li>
                     <li class="current"><a href="/">Home</a> </li>
                     <li><a href="/board/list">Board</a> </li>
                     <li><a href="/board/logout">Logout</a> </li>
@@ -30,8 +30,8 @@
     <div id="banner">
         <div class="wrapper style1 special">
             <div class="inner">
-                <h1 class="heading alt">스프링 게시판</h1>
-                <p>스프링 최종 예제</p>
+                <h1 class="heading alt">스프링 부트 게시판</h1>
+                <p>스프링 부트</p>
                 <div class="image fit special">
                     <img src="https://images.unsplash.com/photo-1657497850516-de7b59ac243b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80" alt="" />
                 </div>

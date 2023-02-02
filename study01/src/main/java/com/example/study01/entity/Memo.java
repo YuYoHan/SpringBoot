@@ -10,7 +10,7 @@ import javax.persistence.*;
 // 이 어노테이션이 붙으면 옵션에 따라 자동으로 테이블을 생성하고 변수에 따라 컬럼도 자동으로 생성
 @Entity
 // 어떤 테이블로 생성할 것인지 담아둔 어노테이션
-@Table(name = "tb1_memo")
+@Table(name = "memo")
 @ToString
 @Getter
 @Builder
