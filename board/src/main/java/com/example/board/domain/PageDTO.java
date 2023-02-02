@@ -23,7 +23,7 @@ public class PageDTO {
         this.startPage = this.endPage - (cri.getAmount() -1);
         // 진짜 페이지하고 수치로만 구한 페이지하고 다를 수 가 있다.
         // realEnd는 진짜 마지막 페이지를 구하는 것이다.
-        this.realEnd = (int)Math.ceil(total * 1.0 / 10);
+        this.realEnd = (int)Math.ceil((total * 1.0) / 10);
         endPage = endPage > realEnd? realEnd : endPage;
 
         // 10페이지 마지막 페이지 전으로 보내주는 것
