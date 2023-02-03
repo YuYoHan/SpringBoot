@@ -40,6 +40,25 @@ public class Criteria {
 
     public String getListLink() {
         // ? 앞에 오는 uri 문자열
+        // URI를 보다 쉽게 다룰 수 있도록 도와주는 UriComponentBuilder를 스프링에서 제공
+        // UriComponents : URI를 구성하는 Components들을 효과적으로 다룰 수 있도록 하는 클래스
+        /*
+        *   URI Components :
+        *       - Scheme
+        *       - UserInfo
+        *       - Host
+        *       - Port
+        *       - Path
+        *       - Query
+        *       - Fragment
+        *
+        *   URI에 대한 정보를 각 구성요소별로 분리하여 변수에 저장하여 가지고 있는 URI 구성요소의 집합
+        *   모든 구성요소에 대해 getter() 메서드를 가지고 있어 이 클래스를 이용하여 각 구성요소에
+        *   손쉽게 접근할 수 있다.
+        * */
+        // UriComponentsBuilder는 UriComponents를 Build할 수 있도록 도와주는 클래스
+        // UriComponents 클래스의 생성자는 모두 package-private or private이기 때문에
+        // 개발자가 이를 구현하지 않는 이상 생성자를 통해 직접 생성 x
         UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
                 // 파라미터 추가
                 .queryParam("pageNum", pageNum)
