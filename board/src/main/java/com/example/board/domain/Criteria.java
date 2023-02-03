@@ -39,7 +39,7 @@ public class Criteria {
     }
 
     public String getListLink() {
-        // ? 앞에 오는 uri 문자열
+
         // URI를 보다 쉽게 다룰 수 있도록 도와주는 UriComponentBuilder를 스프링에서 제공
         // UriComponents : URI를 구성하는 Components들을 효과적으로 다룰 수 있도록 하는 클래스
         /*
@@ -59,8 +59,10 @@ public class Criteria {
         // UriComponentsBuilder는 UriComponents를 Build할 수 있도록 도와주는 클래스
         // UriComponents 클래스의 생성자는 모두 package-private or private이기 때문에
         // 개발자가 이를 구현하지 않는 이상 생성자를 통해 직접 생성 x
+        // 기본이 되는 문자열 → ? 앞에 오는 uri 문자열
         UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
                 // 파라미터 추가
+                // ? 뒤에 오는 uri 문자열
                 .queryParam("pageNum", pageNum)
                 .queryParam("amount", amount)
                 .queryParam("keyword", keyword)
