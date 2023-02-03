@@ -1,4 +1,4 @@
-package com.example.study01.domain;
+package com.example.study01.dto;
 
 import lombok.Data;
 

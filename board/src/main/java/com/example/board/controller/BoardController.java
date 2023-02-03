@@ -8,10 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -32,7 +29,7 @@ public class BoardController {
     public void regist() {}
 
     @GetMapping("/get")
-    public void get(long boardNum, Model model) {
+    public void get(long boardNum, @ModelAttribute("cri") Criteria cri, Model model) {
         model.addAttribute("board", service.get(boardNum));
     }
 

@@ -101,7 +101,7 @@
                     </tbody>
                 </table>
             </div>
-            <form id="searchForm" action="/board/list">
+            <form id="searchForm" action="/board/list" onsubmit="return sendit()">
                 <div>
                     <select name="type">
                         <option value="" >검색</option>
@@ -178,8 +178,9 @@
         pageForm.find("input[name='pageNum']").val(pageNum);
         pageForm.submit();
     })
-    $("#searchForm a").on("click", function (e) {
-        // 검색조건을 아무것도 선택을 안했을 때
+    $("#searchForm a").on("click", sendit)
+      function sendit(e) {
+       // 검색조건을 아무것도 선택을 안했을 때
         /*
         *   if("") → if(false)
         * */
@@ -196,7 +197,7 @@
             return false;
         }
         searchForm.submit();
-    })
+    }
 </script>
 </body>
 </html>

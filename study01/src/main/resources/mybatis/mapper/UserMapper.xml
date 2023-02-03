@@ -5,7 +5,7 @@
     <insert id="join">
         insert into user values (#{userId}, #{userPw}, #{userName})
     </insert>
-    <select id="login" resultType="com.example.study01.domain.UserDTO">
+    <select id="login" resultType="com.example.study01.dto.UserDTO">
         select * from user where userId=#{userId} and userPw=#{userPw}
     </select>
 </mapper>

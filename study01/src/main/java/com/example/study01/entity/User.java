@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
+// 테이블 이름 정하기
 @Table(name = "user")
 // 기본 생성자를 자동으로 만들어줌
 @NoArgsConstructor
@@ -13,13 +14,17 @@ import javax.persistence.*;
 @ToString
 @Getter
 @Builder
+@Setter
 public class User {
 
+    // PK
     @Id
+    // auto_increment
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @Column(length = 200, nullable = false)
+    // unique 제약조건
+    @Column(unique = true)
     private String userEmail;
     @Column(length = 200, nullable = false)
     private String userPw;
