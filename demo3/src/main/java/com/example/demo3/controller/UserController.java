@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @Log4j2
 @RequiredArgsConstructor
@@ -33,10 +35,11 @@ public class UserController {
     }
 
     @PostMapping("/user/login")
-    public String login(@ModelAttribute("loginUser") UserDTO user) {
+    public String login(@ModelAttribute("loginUser") UserDTO user, HttpSession session) {
         UserDTO loginResult = userService.login(user);
         if(loginResult != null) {
             // login 성공
+            session.setAttribute("loginEmail", loginResult.getUserEmail());
             return "home";
         } else {
             // login 실패

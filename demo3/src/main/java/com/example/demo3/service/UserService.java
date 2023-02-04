@@ -7,6 +7,8 @@ import com.example.demo3.repository.UserReposiory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -27,8 +29,24 @@ public class UserService {
         /*
         *   1. 회원이 입력한 이메일로 DB에서 조회를 함
         *   2. DB에서 조회한 비밀번호와 사용자가 입력한 비밀번호가 일치하는지 판단
-        *   3.
         *
         * */
+        Optional<User> byUserEmail = userReposiory.findByUserEmail(user.getUserEmail());
+        if(byUserEmail.isPresent()) {
+            // 조회 결과 있음
+            User userEntity = byUserEmail.get();
+            if(userEntity.getUserPw().equals(user.getUserPw())) {
+                // 비밀번호 일치
+                // entity → dto 변환
+                UserDTO userDTO = UserDTO.toUserDTO(userEntity);
+                return userDTO;
+            } else {
+                // 비밀번호 불일치
+                return null;
+            }
+        } else {
+            // 조회결과 없음
+            return null;
+        }
     }
 }
