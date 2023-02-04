@@ -29,6 +29,18 @@ public class UserController {
 //        log.info("userPw : " + user.getUserId());
 //        log.info("userId : " + user.getUserId());
         userService.save(user);
-        return "login";
+        return "/user/login";
+    }
+
+    @PostMapping("/user/login")
+    public String login(@ModelAttribute("loginUser") UserDTO user) {
+        UserDTO loginResult = userService.login(user);
+        if(loginResult != null) {
+            // login 성공
+            return "home";
+        } else {
+            // login 실패
+            return "/user/login";
+        }
     }
 }
