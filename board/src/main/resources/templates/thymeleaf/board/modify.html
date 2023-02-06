@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+  <link rel="shortcut icon" href="#">
+  <meta name="description" content=""/>
+  <meta name="keywords" content=""/>
+  <link rel="stylesheet" href="/resources/assets/css/main.css"/>
+  <style>
+    #banner input, #banner select, #banner option {
+      color: #000000;
+    }
+
+    input:not(.button), textarea {
+      border: 1px solid black !important;
+      color: #000000 !important;
+    }
+
+    #banner .write_area input::placeholder {
+      color: #ccc !important;
+    }
+
+    .write_area {
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    .write_area input {
+      margin-bottom: 32px;
+    }
+
+    .write_area > form > div {
+      margin-bottom: 32px;
+    }
+
+    .write_area > form > div:nth-of-type(odd) > h4 {
+      float: left;
+    }
+
+    .write_area > form > div:nth-of-type(odd) > input {
+      float: right;
+      width: 70%;
+    }
+
+    form h4 {
+      line-height: 3.25rem;
+    }
+
+    hr {
+      clear: both;
+    }
+
+    .replyForm input, .replyForm textarea {
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="is-preload">
+<!-- header -->
+<header id="header" class="alt">
+  <a class="logo" href="/">Boot<span>Board</span></a>
+  <nav id="nav">
+    <ul>
+      <th:block th:if="${loginUser == null}">
+        <li><a th:action="@{/}">Home</a></li>
+        <li><a th:action="@{/user/signUp.html}">Join</a></li>
+        <li><a th:action="@{/user/login.html}">Login</a></li>
+      </th:block>
+      <th:block th:unless="${loginUser == null}">
+        <li><span th:text="${loginUser}"></span>님 어서오세요</li>
+        <li class="current"><a href="/">Home</a></li>
+        <li><a href="/board/list">Board</a></li>
+        <li><a href="/board/logout">Logout</a></li>
+        <li></li>
+      </th:block>
+    </ul>
+  </nav>
+</header>
+
+<!-- Banner-->
+<div id="banner">
+  <div class="wrapper style1 special">
+    <div class="inner">
+      <h1 class="heading alt">Board</h1>
+      <p><span th:text="${board.boardNum}"></span>번 게시글</p>
+      <a href="/board/list${cri.listLink}" class="button primary" style="float: right; border-bottom: 1px solid #fff; border-radius: 0px; border-top: 1px solid #fff">목록보기</a>
+      <br />
+      <br />
+      <br />
+      <div class="write_area" style="clear:both">
+        <form name="boardForm" method="post" th:action="@{/board/modify}">
+          <input type="hidden" name="boardNum" th:value="${board.boardNum}">
+          <div class="col-12">
+            <h4>제목</h4>
+            <input name="boardTitle" type="text" th:placeholder="${board.boardTitle}" readonly>
+          </div>
+          <div class="col-12">
+            <h4>내용</h4>
+            <textarea name="boardContents"  rows="10" readonly th:text="${board.boardContents}"></textarea>
+          </div>
+          <hr />
+          <div>
+            <h4>작성자</h4>
+            <input name="userId" type="text" th:value="${board.userId}" readonly />
+          </div>
+          <th:block th:if="${loginUser == boardNum}">
+            <hr/>
+            <div style="text-align: right">
+              <input type="button" value="수정"  class="button primary"
+                     onclick="location.href='/board/modify${cri.listLink}&boardNum=${board.boardNum}'">
+              <input type="submit" value="삭제"  class="button primary">
+            </div>
+          </th:block>
+        </form>
+        <h3>댓 글</h3>
+        <p style="text-align: right;">
+          <a href="#" class="button primary small">댓글 등록</a>
+        </p>
+        <div class="replyForm row" style="" >
+          <div style="width: 15%">
+            <h4>작성자</h4>
+            <input name="replyWriter" th:value="${loginUser}" readonly style="text-align: center">
+          </div>
+          <div style="width: 65%;">
+            <h4>내 용</h4>
+            <textarea name="replyContents" th:placeholder="Contents" style="resize: none;"></textarea>
+          </div>
+          <div style="width: 15%">
+            <h4>&nbsp;</h4>
+            <a href="#" class="button primary small" style="margin-bottom: 1rem;">등록</a>
+            <a href="#" class="button primary small">취소</a>
+          </div>
+        </div>
+        <br/>
+        <br/>
+        <!-- 댓글 띄우는 ul-->
+        <ul class="alt replies">
+
+        </ul>
+        <!-- 댓글 페이징 처리할 div-->
+        <div class="page">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

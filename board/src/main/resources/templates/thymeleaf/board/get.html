@@ -109,7 +109,8 @@
                     <th:block th:if="${loginUser == boardNum}">
                         <hr/>
                         <div style="text-align: right">
-                            <input type="button" value="수정"  class="button primary">
+                            <input type="button" value="수정"  class="button primary"
+                                   onclick="location.href='/board/modify${cri.listLink}&boardNum=${board.boardNum}'">
                             <input type="submit" value="삭제"  class="button primary">
                         </div>
                     </th:block>
