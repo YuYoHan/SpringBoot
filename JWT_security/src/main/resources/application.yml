@@ -1,4 +1,5 @@
 spring:
+
   h2:
     console:
       enabled: true
@@ -10,6 +11,7 @@ spring:
     password:
 
   jpa:
+    # H2? JPA ??
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create-drop
@@ -19,5 +21,11 @@ spring:
         show_sql: true
 
 logging:
-  level:
-    me.silvernine: debug
+  config: classpath:log4j2.xml
+
+jwt:
+  header : Authorization
+  #HS512 ????? ??? ??? ??? 512bit, ? 64byte ??? secret key? ???? ??.
+  #echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret'|base64
+  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  token-validity-in-seconds: 86400
