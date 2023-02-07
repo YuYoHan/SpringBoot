@@ -19,6 +19,12 @@ public class UserController {
     // 생성자 주입
     private final UserService userService;
 
+
+    @GetMapping("/login")
+    public String login() {
+        return "/user/login";
+    }
+
     // 회원가입 페이지 출력 요청
     @GetMapping("/user/save")
     public String saveForm() {return "save";}
