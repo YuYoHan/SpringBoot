@@ -30,7 +30,7 @@ public class UserController {
     // 회원가입 페이지 출력 요청
     @GetMapping("/user/save")
     public String saveForm(Model model) {
-        return "save";
+        return "/user/save";
     }
 
     @PostMapping("/user/save")
