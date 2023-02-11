@@ -32,6 +32,9 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     // log4j
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    // 스프링 액추에이터는 애플리케이션에 대한 모니터링 정보를 엔드포인트를 통해 제공한다.
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 }
 
 tasks.named('test') {
