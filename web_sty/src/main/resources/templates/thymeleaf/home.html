@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #F2D7D5;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">🌺</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link" href="#">Features</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="card text-center">
+            <h5 class="card-header">Data transmission using ajax</h5>
+            <div class="card-body">
+                <h5 class="card-title">hello! 😀 </h5>
+                <a th:href="@{/user/save}" >회원가입</a>
+                <a th:href="@{/user/login}">로그인</a>
+                <p class="card-text">
+                    Enter the text you want to send and click the button.</p>
+                <form class="card-text">
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                            <input id="input" placeholder="Please enter text" type="text" class="form-control">
+                            <button class="btn btn-outline-secondary" type="button" onclick="dataSend()">submit</button>
+                        </div>
+                    </div>
+                    <div id="resultDiv">
+                        <p th:if="${msg}!=null" th:text="${msg}"></p>
+                    </div>
+                </form>
+                <a href="#" class="btn" style="background-color: #EBDEF0">Go github</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function dataSend() {
+        let data=$("#input").val();
+        let messageDTO={
+            result:data
+        };
+        $.ajax({
+            url: "/dataSend",
+            data: messageDTO,
+            type:"POST",
+        }).done(function (fragment) {
+            $("#resultDiv").replaceWith(fragment);
+        });
+    }
+</script>
+</body>
+</html>
