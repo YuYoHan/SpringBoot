@@ -1,5 +1,6 @@
 package com.example.web_sty.controller;
 
+import com.example.web_sty.dto.userDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -7,10 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @Log4j2
@@ -30,10 +28,8 @@ public class UserController {
     }
 
     @PostMapping("/user/save")
-    public String save(
-            @RequestParam("userEmail") String userEmail,
-            @RequestParam("userPw") String userPw,
-            @RequestParam("userName") String userName) {
+    public String save(@ModelAttribute userDTO userDTO) {
+        log.info("userDTO = " + userDTO);
         return "home";
 
     }
