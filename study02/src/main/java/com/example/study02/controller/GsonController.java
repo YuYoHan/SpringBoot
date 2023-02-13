@@ -1,9 +1,12 @@
 package com.example.study02.controller;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -40,4 +43,6 @@ public class GsonController {
         jsonObject.add("testData", jsonArray);
         return jsonObject.toString();
     }
+
+
 }
