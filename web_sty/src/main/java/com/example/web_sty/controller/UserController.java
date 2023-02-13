@@ -1,6 +1,7 @@
 package com.example.web_sty.controller;
 
 import com.example.web_sty.dto.userDTO;
+import com.example.web_sty.service.userService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 @Log4j2
 @RequiredArgsConstructor
 public class UserController {
+
+    // 생성자 주입
+    private final userService userService;
 
 
     @GetMapping("/login")
@@ -30,6 +34,7 @@ public class UserController {
     @PostMapping("/user/save")
     public String save(@ModelAttribute userDTO userDTO) {
         log.info("userDTO = " + userDTO);
+        userService.save(userDTO);
         return "home";
 
     }
