@@ -6,6 +6,8 @@ import com.example.web_sty.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class userService {
@@ -24,8 +26,21 @@ public class userService {
         /*
         *   1. 회원이 입력한 이메일로 DB에서 조회를 함
         *   2. DB에서 조회한 비밀번호와 사용자가 입력한 비밀번호가 일치하는지 판단
-        *
-        *
         * */
+        Optional<UserEntity> byUserEmail = userRepository.findByUserEmail(userDTO.getUserEmail());
+        if(byUserEmail.isPresent()) {
+            // 조회 결과가 있다.(해당 이메일을 가진 회원 정보가 있다)
+            UserEntity userEntity = byUserEmail.get();
+            if(userEntity.getUserPw().equals(userDTO.getUserPw())) {
+                // 비밀번호 일치
+                
+            } else {
+                // 비밀번호 불일치(로그인 실패)
+
+            }
+        } else {
+            // 조회 결과가 없다(해당 이메일을 가진 회원이 없다)
+            return null;
+        }
     }
 }

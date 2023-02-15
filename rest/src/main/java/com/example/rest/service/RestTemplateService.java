@@ -36,7 +36,7 @@ public class RestTemplateService {
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(uri, String.class);
         return responseEntity.getBody();
     }
-    
+
     public String getNameWithParameter() {
         URI uri = UriComponentsBuilder
                 .fromUriString("http://localhost:9090")
