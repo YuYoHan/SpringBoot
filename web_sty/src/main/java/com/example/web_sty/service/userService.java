@@ -1,6 +1,7 @@
 package com.example.web_sty.service;
 
-import com.example.web_sty.dto.userDTO;
+import com.example.web_sty.dto.UserDTO;
+import com.example.web_sty.entity.UserEntity;
 import com.example.web_sty.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,21 @@ import org.springframework.stereotype.Service;
 public class userService {
 
     private final UserRepository userRepository;
-    public void save(userDTO userDTO) {
+    public void save(UserDTO userDTO) {
+        // 1. dto → entity 변환
+        // 2. repository의 save 메서드 호출
+        UserEntity userEntity = UserEntity.toUserEntity(userDTO);
+        userRepository.save(userEntity);
+        // repository의 save 매서드 호출 (조건 : entity객체를 넘겨줘야 함)
+
+    }
+
+    public UserDTO login(UserDTO userDTO) {
+        /*
+        *   1. 회원이 입력한 이메일로 DB에서 조회를 함
+        *   2. DB에서 조회한 비밀번호와 사용자가 입력한 비밀번호가 일치하는지 판단
+        *
+        *
+        * */
     }
 }

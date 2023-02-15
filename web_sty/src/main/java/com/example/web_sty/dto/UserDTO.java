@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 // 필드를 모두 매개변수로 하는 생성자를 만들어준다.
 @AllArgsConstructor
-public class userDTO {
+public class UserDTO {
     private  Long id;
     private String userEmail;
     private String userPw;

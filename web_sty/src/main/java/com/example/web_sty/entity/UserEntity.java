@@ -1,6 +1,7 @@
 package com.example.web_sty.entity;
 
 
+import com.example.web_sty.dto.UserDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,4 +27,12 @@ public class UserEntity {
 
     @Column
     private String userName;
+
+    public static UserEntity toUserEntity(UserDTO userDTO) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUserEmail(userDTO.getUserEmail());
+        userEntity.setUserPw(userDTO.getUserPw());
+        userEntity.setUserName(userDTO.getUserName());
+        return userEntity;
+    }
 }

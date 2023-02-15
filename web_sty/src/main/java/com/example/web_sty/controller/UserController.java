@@ -1,6 +1,6 @@
 package com.example.web_sty.controller;
 
-import com.example.web_sty.dto.userDTO;
+import com.example.web_sty.dto.UserDTO;
 import com.example.web_sty.service.userService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -32,11 +32,22 @@ public class UserController {
     }
 
     @PostMapping("/user/save")
-    public String save(@ModelAttribute userDTO userDTO) {
+    public String save(@ModelAttribute UserDTO userDTO) {
         log.info("userDTO = " + userDTO);
         userService.save(userDTO);
-        return "home";
+        return "/user/login";
+    }
 
+    @PostMapping("/user/login")
+    public String login(@ModelAttribute UserDTO userDTO) {
+        UserDTO loginResult = userService.login(userDTO);
+        if(loginResult != null) {
+            // login 성공
+            return "/";
+        } else {
+            // login 실패
+            return "/user/login";
+        }
     }
 
 
