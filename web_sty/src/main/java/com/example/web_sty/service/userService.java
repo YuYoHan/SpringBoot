@@ -33,7 +33,8 @@ public class userService {
             UserEntity userEntity = byUserEmail.get();
             if(userEntity.getUserPw().equals(userDTO.getUserPw())) {
                 // 비밀번호 일치
-                
+                // entity → dto 변환후 리턴
+
             } else {
                 // 비밀번호 불일치(로그인 실패)
 

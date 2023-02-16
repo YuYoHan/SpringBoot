@@ -1,5 +1,6 @@
 package com.example.web_sty.dto;
 
+import com.example.web_sty.entity.UserEntity;
 import lombok.*;
 
 @Getter
@@ -14,4 +15,8 @@ public class UserDTO {
     private String userEmail;
     private String userPw;
     private String userName;
+
+    public static UserDTO toUserDTO(UserEntity userEntity) {
+        
+    }
 }
