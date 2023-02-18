@@ -17,6 +17,8 @@ public class UserDTO {
     private String userName;
 
     public static UserDTO toUserDTO(UserEntity userEntity) {
-        
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(userEntity.getId());
+        userDTO.setUserEmail(userEntity.getUserEmail());
     }
 }
