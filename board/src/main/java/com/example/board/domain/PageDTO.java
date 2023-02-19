@@ -17,6 +17,12 @@ public class PageDTO {
 
         // 페이지가 10이면 10 / 10.0을 해서 1이 나온다.
         // 그런 다음 * 10을 해줘서 10이된다. 10은 마지막 페이지다.
+        // Math.ceil()은 소수점을 올림처리 하므로 다음과 같은 상황이 일어난다.
+        /*
+        *   1페이지 : Math.ceil(0.1) * 10 = 10
+        *   10페이지 : Math.ceil(1) * 10 = 10
+        *   11페이지 : Math.ceil(1.1) * 10 = 20
+        * */
         this.endPage = (int)Math.ceil(pageNum/10.0) * 10;
         // Criteria클래스의 amount가 10이라면 10-1이 되서 9가 되고
         // endPage가 10이라면  10 - 9가되서 startPage는 1페이지가 된다.

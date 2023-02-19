@@ -1,54 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.board.mapper.BoardMapper">
-    <sql id="cri">
-        <if test="keyword != null and type != null">
-            <trim prefixOverrides="or" prefix="(" suffix=") and">
-                <foreach collection="typeArr" item="type">
-                    <trim prefix="or">
-                        <choose>
-                            <when test="type == 'T'.toString()">
-                                (boardTitle like('%${keyword}%'))
-                            </when>
-                            <when test="type == 'C'.toString()">
-                                (boardContents like('%${keyword}%'))
-                            </when>
-                            <when test="type == 'T'.toString()">
-                                (userId like('%${keyword}%'))
-                            </when>
-                        </choose>
-                    </trim>
-                </foreach>
-            </trim>
-        </if>
-    </sql>
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.mapper.BoardMapper">
+	<sql id="cri">
+		<if test="keyword != null and type != null">
+			<trim prefixOverrides="or" prefix="(" suffix=") and">
+				<foreach collection="typeArr" item="type">
+					<trim prefix="or">
+						<choose>
+							<when test="type=='T'.toString()">
+								(boardTitle like('%${keyword}%'))
+							</when>
+							<when test="type=='C'.toString()">
+								(boardContents like('%${keyword}%'))
+							</when>
+							<when test="type=='W'.toString()">
+								(userId like('%${keyword}%'))
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+		</if>
+	</sql>
 
-    <select id="getList" resultType="com.example.board.domain.BoardDTO">
-        <!-- 0 <boardNum하면 과로 처리하지만 CDATA안에 써주면 제대로 사용 가능하다-->
-    select * from board where
-            <include refid="cri"/>
-        <![CDATA[
-            0 < boardNum order by  boardNum desc limit #{startrow}, #{amount}
-        ]]>
-    </select>
-    <insert id="insert">
-        insert into board (boardTitle, boardContents, userId)
-        values (#{boardTitle}, #{boardContents}, #{userId})
-    </insert>
-    <select id="getDetail" resultType="com.example.board.domain.BoardDTO">
-        select *
-        from board
-        where boardNum = #{boardNum}
-    </select>
-    <select id="getMaxBoardNum" resultType="_int">
-        select max(boardNum)
-        from board
-        where userId = #{userId}
-    </select>
-    <select id="getTotal" resultType="_int">
-        select count(*)
-        from board
-        where <include refid="cri"/> boardNum > 0;
-    </select>
+	<insert id="insert">
+		insert into board (boardTitle,boardContents,userId)
+		values(#{boardTitle},#{boardContents},#{userId})
+	</insert>
+	
+	<update id="update">
+		update board set boardTitle=#{boardTitle}, boardContents=#{boardContents},
+		updateDate=now() where boardNum=#{boardNum}
+	</update>
+	
+	
+	<select id="getList" resultType="com.example.domain.BoardDTO">
+		select * from board where
+		<include refid="cri"></include>
+		<![CDATA[
+			0<boardNum order by boardNum desc limit #{startrow},#{amount}
+		]]>
+	</select>
+	<select id="getMaxBoardNum" resultType="_int">
+		select max(boardNum) from board where userId=#{userId}
+	</select>
+	<select id="getDetail" resultType="com.example.domain.BoardDTO">
+		select * from board where boardNum=#{boardNum}
+	</select>
+	<select id="getTotal" resultType="_int">
+		select count(*) from board where <include refid="cri"></include> boardNum>0
+	</select>
+	
+	<delete id="delete">
+		delete from board where boardNum=#{boardNum}
+	</delete>
 </mapper>
+
+
+
+

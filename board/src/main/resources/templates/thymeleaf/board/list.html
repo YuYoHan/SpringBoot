@@ -77,19 +77,19 @@
                     </thead>
                     <tbody>
                     <!-- th:block은 반복문이나 조건문 돌릴 때 자주사용한다.-->
-                    <th:block th:if="${list} != null and ${list.size()}>0">
+                    <th:block th:if="${list != null and list.size()>0}">
                         <!--list : ${list} 이렇게하면 model에 입력했던 것을 내가 정한 이름으로 줄 수 있다.
                           예를들어, BoardController에 list로 주어진 모델에 getList로 board를 볼 수 있게
                           넣어놨다. 모델 키값은 현재 list에서 list : ${키값}으로 다시 list를 줬지만
                           다른 이름으로도 할 수 있다.-->
                         <tr th:each="list : ${list}">
-                            <td>${list.boardNum}</td>
-                            <td><a th:href="@{list.boardNum}">${list.boardTitle}</a></td>
-                            <td>${list.userId}</td>
-                            <td>${list.regDate}
-                                <th:block th:if="${list.regDate} != list.updateDate">
-                                    (${list.updateDate})
-                                </th:block>
+                            <td th:text="${list.boardNum}"></td>
+                            <td th:text="${list.boardTitle}" th:href="@{list.boardNum}"></td>
+                            <td th:text="${list.userId}"></td>
+                            <td th:text="${list.regDate}">
+<!--                                <th:block th:if="${list.regDate} != list.updateDate">-->
+<!--                                    (${list.updateDate})-->
+<!--                                </th:block>-->
                             </td>
                         </tr>
                     </th:block>
@@ -119,14 +119,29 @@
                 <input type="hidden" value="10" name="amount">
             </form>
             <div class="pagination center">
-                <th:block th:if="${pageMaker.prev}">
-                    <a class="changePage" th:href="@{pageMaker.startPage -1}"><code>&lt</code></a>
-                </th:block>
-                <!--
-                    여기에서 페이지 할것을 구현해야 합니다.
-                    타임리프로 구현해야 하는데 하는법을 모르겠음...
-                    나중에 구현하고 일단은 백쪽 구현
-                -->
+<!--                <th:block th:if="${pageMaker.prev}">-->
+<!--                    <a class="changePage" th:href="@{pageMaker.startPage -1}"><code>&lt</code></a>-->
+<!--                </th:block>-->
+                <nav style="text-align: center;">
+                    <ul th:width="start=${pageMaker.startPage}, end=${pageMaker.endPage}">
+                        <li th:if="${pageMaker.prev}">
+                            <a class="changePage" th:href="@{pageMaker.startPage-1}"><code><</code></a>
+                        </li>
+                        <li th:each="list, pageMaker : ${pageMaker}">
+                            <a th:if="${list == pageMaker.cri.pageNum}" th:href="@{/board/list(list)}">
+                                <code class="nowPage">${list}</code>
+                            </a>
+                            <a class="changePage" th:unless="${list == pageMaker.cri.pageNum}" th:href="@{/board/list(list)}">
+                                <code>${list}</code>
+                            </a>
+                        </li>
+                        <li th:text="${pageMaker.next}">
+                            <a class="changePage" th:href="@{pageMaker.endPage+1}"><code>></code></a>
+                        </li>
+                    </ul>
+
+                </nav>
+
             </div>
             <div>
                 <code>&lt;</code>

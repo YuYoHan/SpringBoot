@@ -29,6 +29,7 @@
                 <h5 class="card-title">hello! 😀 </h5>
                 <a th:href="@{/user/save}" >회원가입</a>
                 <a th:href="@{/user/login}">로그인</a>
+                session 값 확인: <p th:text="${session.loginEmail}"></p>
                 <p class="card-text">
                     Enter the text you want to send and click the button.</p>
                 <form class="card-text">

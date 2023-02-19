@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @Log4j2
@@ -38,12 +39,18 @@ public class UserController {
         return "/user/login";
     }
 
+    @GetMapping("/user/login")
+    public String loginForm() {
+        return "/user/login";
+    }
+
     @PostMapping("/user/login")
-    public String login(@ModelAttribute UserDTO userDTO) {
+    public String login(@ModelAttribute UserDTO userDTO, HttpSession session) {
         UserDTO loginResult = userService.login(userDTO);
         if(loginResult != null) {
             // login 성공
-            return "/";
+            session.setAttribute("loginEmail", loginResult.getUserEmail());
+            return "home";
         } else {
             // login 실패
             return "/user/login";

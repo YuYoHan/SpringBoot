@@ -50,4 +50,20 @@ public class BoardController {
         log.info("/get or modify");
         model.addAttribute("board", service.get(boardNum));
     }
+
+    @PostMapping("/modify")
+    public String modify(BoardDTO board, Criteria cri, RedirectAttributes ra) {
+        if(service.modify(board)) {
+            ra.addFlashAttribute("mn",board.getBoardNum());
+        }
+        return "redirect:/board/get"+cri.getListLink()+"&boardnum="+board.getBoardNum();
+    }
+
+    @PostMapping("/remove")
+    public String remove(Long boardnum,Criteria cri) {
+        if(service.remove(boardnum)) {
+            //
+        }
+        return "redirect:/board/list"+cri.getListLink();
+    }
 }
