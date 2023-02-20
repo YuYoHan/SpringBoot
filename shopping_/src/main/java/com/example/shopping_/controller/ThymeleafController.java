@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/*")
 public class ThymeleafController {
     @GetMapping("/thymeleafEx01")
     public String thymeleafExample01(Model model) {
@@ -92,6 +91,11 @@ public class ThymeleafController {
         model.addAttribute("param1", param1);
         model.addAttribute("param2", param2);
         return "/ex07";
+    }
+
+    @GetMapping("/ex08")
+    public String ex08() {
+        return "ex08";
     }
 
 }
