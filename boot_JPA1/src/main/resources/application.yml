@@ -28,4 +28,9 @@ spring:
   mvc:
     ignore-default-model-on-redirect: false
 
+logging:
+  level:
+    org.hibernate.sql: debug
+    org.hibernate.type: trace
+
 
