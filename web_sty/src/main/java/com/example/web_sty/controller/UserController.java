@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @Log4j2
@@ -58,6 +59,10 @@ public class UserController {
         }
     }
 
+    @GetMapping("/user/")
+    public String findAll() {
+        List<UserDTO> userDTOList = userService.findAll();
+    }
 
 
 }
