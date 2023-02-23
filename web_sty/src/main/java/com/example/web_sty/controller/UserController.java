@@ -45,6 +45,7 @@ public class UserController {
     }
 
     @PostMapping("/user/login")
+    // session 사용 : HttpSession
     public String login(@ModelAttribute UserDTO userDTO, HttpSession session) {
         UserDTO loginResult = userService.login(userDTO);
         if(loginResult != null) {

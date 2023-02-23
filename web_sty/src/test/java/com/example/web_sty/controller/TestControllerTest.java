@@ -1,5 +1,6 @@
 package com.example.web_sty.controller;
 
+import org.apache.juli.logging.Log;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,6 +14,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 import javax.transaction.Status;
+
+import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 

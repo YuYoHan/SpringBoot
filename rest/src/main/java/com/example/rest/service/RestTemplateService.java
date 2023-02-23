@@ -50,4 +50,26 @@ public class RestTemplateService {
 
         return responseEntity.getBody();
     }
+
+
+    public ResponseEntity<MemberDTO> postWithParamAndBody() {
+        URI uri = UriComponentsBuilder
+                .fromUriString("http://localhost:9090")
+                .path("/api/v1/crud-api")
+                .queryParam("name", "Flature")
+                .queryParam("email", "zxzz45@naver.com")
+                .queryParam("organization", "Wikibooks")
+                .encode()
+                .build()
+                .toUri();
+
+        Me
+    }
+
+
+
+
+
+
+
 }

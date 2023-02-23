@@ -38,11 +38,12 @@ public class userService {
 
             } else {
                 // 비밀번호 불일치(로그인 실패)
-
+                return null;
             }
         } else {
             // 조회 결과가 없다(해당 이메일을 가진 회원이 없다)
             return null;
         }
+        return null;
     }
 }
