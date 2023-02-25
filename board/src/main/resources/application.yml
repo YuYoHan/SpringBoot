@@ -27,8 +27,6 @@ spring:
   mvc:
     ignore-default-model-on-redirect: false
 
-logging:
-  config: classpath:log4j2.xml
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

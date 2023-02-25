@@ -1,5 +1,6 @@
 package com.example.boot_jpa1.domain;
 
+import com.example.boot_jpa1.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
 
