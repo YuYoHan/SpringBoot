@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -52,7 +53,9 @@ public class UserController {
         if(loginResult != null) {
             // login 성공
             session.setAttribute("loginEmail", loginResult.getUserEmail());
-            return "home";
+            log.info("userEmail : " + loginResult.getUserEmail());
+            log.info("userPw : " + loginResult.getUserPw());
+            return "/home";
         } else {
             // login 실패
             return "/user/login";
@@ -60,8 +63,19 @@ public class UserController {
     }
 
     @GetMapping("/user/")
-    public String findAll() {
+    public String findAll(Model model) {
         List<UserDTO> userDTOList = userService.findAll();
+        // 어떠한 html로 가져갈 데이터가 있다면 model사용
+        model.addAttribute("userList", userDTOList);
+        return "user/list";
+    }
+
+    @GetMapping("/user/{id}")
+    // 경로상의 값(/user/{id})를 가져올 때는 @PathVariable을 쓴다.
+    public String findById(@PathVariable Long id, Model model) {
+        UserDTO userDTO = userService.findById(id);
+        model.addAttribute("user", userDTO);
+        return "detail";
     }
 
 
