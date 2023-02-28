@@ -1,17 +1,18 @@
 import "./App.css";
-import { useState } from "react";
+import { Route, Routes } from "react-router";
+import { BrowserRouter } from "react-router-dom";
+import ListProduct from "./components/ListProduct";
 
 function App() {
-    const [names, setName] = useState(["김철수", "마이클", "박상수"]);
+    console.warn = function no_console() {};
     return (
-        <div className="App">
-            {names[0]}
-            <br />
-            {names[1]}
-            <br />
-            {names[2]}
-            <br />
-        </div>
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<ListProduct />} />
+                </Routes>
+            </BrowserRouter>
+        </>
     );
 }
 
