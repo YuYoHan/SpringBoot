@@ -78,5 +78,19 @@ public class UserController {
         return "/user/detail";
     }
 
+    @GetMapping("/user/update")
+    public String updateForm(HttpSession session, Model model) {
+        String myEmail = (String) session.getAttribute("loginEmail");
+        UserDTO userDTO = userService.updateForm(myEmail);
+        model.addAttribute("updateUser", userDTO);
+        return "/user/update";
+    }
+
+    @PostMapping("/user/update")
+    public String update(@ModelAttribute UserDTO userDTO) {
+        userService.update(userDTO);
+        return "redirect:/user/" + userDTO.getId();
+    }
+
 
 }

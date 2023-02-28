@@ -73,4 +73,17 @@ public class userService {
             return null;
         }
     }
+
+    public UserDTO updateForm(String myEmail) {
+        Optional<UserEntity> byUserEmail = userRepository.findByUserEmail(myEmail);
+        if(byUserEmail.isPresent()) {
+            return UserDTO.toUserDTO(byUserEmail.get());
+        } else {
+            return null;
+        }
+    }
+
+    public void update(UserDTO userDTO) {
+        userRepository.save()
+    }
 }
