@@ -81,15 +81,26 @@ public class UserController {
     @GetMapping("/user/update")
     public String updateForm(HttpSession session, Model model) {
         String myEmail = (String) session.getAttribute("loginEmail");
-        UserDTO userDTO = userService.updateForm(myEmail);
-        model.addAttribute("updateUser", userDTO);
-        return "/user/update";
+
+        if(myEmail != null) {
+            UserDTO userDTO = userService.updateForm(myEmail);
+            model.addAttribute("updateUser", userDTO);
+            return "/user/update";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/user/update")
     public String update(@ModelAttribute UserDTO userDTO) {
         userService.update(userDTO);
         return "redirect:/user/" + userDTO.getId();
+    }
+
+    @GetMapping("/user/delete/{id}")
+    public String deleteById(@PathVariable Long id) {
+        userService.deleteById(id);
+        return "redirect:/user/";
     }
 
 

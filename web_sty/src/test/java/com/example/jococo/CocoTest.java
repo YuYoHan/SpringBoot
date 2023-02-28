@@ -1,5 +1,6 @@
 package com.example.jococo;
 
+import com.example.web_sty.jococo.Coco;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

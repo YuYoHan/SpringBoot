@@ -1,4 +1,4 @@
-package com.example.jococo;
+package com.example.web_sty.jococo;
 
 
 public class Coco {

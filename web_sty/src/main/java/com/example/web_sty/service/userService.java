@@ -86,4 +86,8 @@ public class userService {
     public void update(UserDTO userDTO) {
         userRepository.save(UserEntity.toUserEntity(userDTO));
     }
+
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
 }
