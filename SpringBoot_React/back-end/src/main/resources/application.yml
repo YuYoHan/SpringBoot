@@ -1,5 +1,8 @@
 server:
   port: 9090
+  error:
+    whitelabel:
+      enabled: false
 
 spring:
   devtools:
@@ -16,8 +19,11 @@ spring:
     username: root
     password: 1234
 
-
   mvc:
+    view:
+      prefix: classpath:/static/
+      suffix: .html
+
     ignore-default-model-on-redirect: false
 
 
