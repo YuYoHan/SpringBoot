@@ -1,0 +1,24 @@
+@import url(http://fonts.gooleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+    font-family: "Nanum Gothic", serif;
+    margin: 10px;
+}
+a:link {
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: red;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+    color: yellow;
+}
