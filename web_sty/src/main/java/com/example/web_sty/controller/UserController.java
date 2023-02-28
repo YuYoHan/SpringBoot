@@ -111,6 +111,12 @@ public class UserController {
     // ajax를 쓸 때는 반드시 @ResponseBody를 써야한다.
     public @ResponseBody String emailCheck(@RequestParam("userEmail") String userEmail) {
         log.info("userEmail : " + userEmail);
-        return "체크완료!";
+        String checkResult = userService.emailCheck(userEmail);
+        return checkResult;
+//        if(checkResult != null) {
+//            return "ok!";
+//        } else {
+//            return "no!";
+//        }
     }
 }

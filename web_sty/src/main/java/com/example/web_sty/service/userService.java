@@ -90,4 +90,15 @@ public class userService {
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
+
+    public String emailCheck(String userEmail) {
+        Optional<UserEntity> byUserEmail = userRepository.findByUserEmail(userEmail);
+        if(byUserEmail.isPresent()) {
+            // 조회결과가 있다 → 사용x
+            return null;
+        } else {
+            // 조회결과가 없다 → 사용o
+            return "ok";
+        }
+    }
 }
