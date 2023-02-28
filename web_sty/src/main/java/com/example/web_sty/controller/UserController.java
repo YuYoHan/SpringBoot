@@ -103,5 +103,10 @@ public class UserController {
         return "redirect:/user/";
     }
 
+    @GetMapping("/user/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
 
 }
