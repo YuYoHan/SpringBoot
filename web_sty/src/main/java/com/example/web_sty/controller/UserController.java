@@ -75,7 +75,7 @@ public class UserController {
     public String findById(@PathVariable Long id, Model model) {
         UserDTO userDTO = userService.findById(id);
         model.addAttribute("user", userDTO);
-        return "detail";
+        return "/user/detail";
     }
 
 

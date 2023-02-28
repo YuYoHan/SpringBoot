@@ -69,6 +69,8 @@ public class userService {
 //            UserDTO userDTO = UserDTO.toUserDTO(userEntity);
 //            return userDTO;
             return UserDTO.toUserDTO(byId.get());
+        } else {
+            return null;
         }
     }
 }
