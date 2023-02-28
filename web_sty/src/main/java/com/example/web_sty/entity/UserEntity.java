@@ -30,6 +30,7 @@ public class UserEntity {
 
     public static UserEntity toUserEntity(UserDTO userDTO) {
         UserEntity userEntity = new UserEntity();
+        userEntity.setId(userDTO.getId());
         userEntity.setUserEmail(userDTO.getUserEmail());
         userEntity.setUserPw(userDTO.getUserPw());
         userEntity.setUserName(userDTO.getUserName());

@@ -84,6 +84,6 @@ public class userService {
     }
 
     public void update(UserDTO userDTO) {
-        userRepository.save()
+        userRepository.save(UserEntity.toUserEntity(userDTO));
     }
 }
