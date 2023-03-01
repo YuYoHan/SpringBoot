@@ -5,4 +5,7 @@
     <select id="list" resultType="java.util.Map">
         select * from product order by product_name
     </select>
+    <insert id="insert">
+        insert into product (product_name, description, price, fileName) VALUES (#{product_name}, #{description}, #{price}, #{fileName})
+    </insert>
 </mapper>

@@ -21,11 +21,6 @@ public class UserController {
     private final userService userService;
 
 
-    @GetMapping("/login")
-    public String login(HttpServletRequest req) {
-        return "/user/login";
-    }
-
     // 회원가입 페이지 출력 요청
     @GetMapping("/user/save")
     public String saveForm(Model model) {

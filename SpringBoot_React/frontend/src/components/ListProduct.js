@@ -1,8 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
 import "./main.css";
 import ProductItem from "./ProductItem";
+import { useNavigate } from "react-router";
 
 function ListProduct() {
+    const navigate = useNavigate();
     const [items, setProductList] = useState([]);
 
     function getList(url) {
@@ -20,6 +22,8 @@ function ListProduct() {
     return (
         <>
             <h2>상품 목록</h2>
+            <button onClick={() => navigate("/write")}>상품등록</button>
+            <hr />
             등록된 상품 수 : {items.length}
             <br /> <br />
             <div
