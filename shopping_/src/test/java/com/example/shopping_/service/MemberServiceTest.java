@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 // 테스트 실행 후 롤백 처리를 해줘서 반복적으로 테스트 가능
@@ -44,5 +45,19 @@ public class MemberServiceTest {
         Assertions.assertThat(member.getAddr()).isEqualTo(saveMember.getAddr());
         Assertions.assertThat(member.getPassword()).isEqualTo(saveMember.getPassword());
         Assertions.assertThat(member.getRole()).isEqualTo(saveMember.getRole());
+    }
+
+    @Test
+    @DisplayName("중복 회원 가입 테스트")
+    public void saveDuplicateMemberTest() {
+        Member member1 = createMember();
+        Member member2 = createMember();
+        memberService.saveMember(member1);
+
+        Throwable e= assertThrows(IllegalStateException.class, () -> {
+            memberService.saveMember(member2);
+        });
+
+        Assertions.assertThat("이미 가입된 회원입니다.").isEqualTo(e.getMessage());
     }
 }
