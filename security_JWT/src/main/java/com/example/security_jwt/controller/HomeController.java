@@ -10,5 +10,13 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/user")
+    public String user() {
+        return "user";
+    }
 
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
 }
