@@ -2,6 +2,7 @@ package com.example.security_jwt.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
@@ -25,14 +26,15 @@ public class UserController {
     public String join() {
         return "join";
     }
+    // 현재 상황은 스프링 시큐리티가 낚아챔!
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
     @GetMapping("/joinProc")
-    public String joinProc() {
-        return "login";
+    public @ResponseBody String joinProc() {
+        return "회원가입이 완료됨!";
     }
 
 }
