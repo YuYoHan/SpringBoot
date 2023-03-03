@@ -1,6 +1,7 @@
 package com.example.web_sty.entity;
 
 
+import com.example.web_sty.dto.BoardDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +32,10 @@ public class BoardEntity extends BaseEntity{
 
     @Column
     private int boardHits;
+
+    public static BoardEntity toSaveEntity(BoardDTO boardDTO) {
+
+    }
 
 
 }
