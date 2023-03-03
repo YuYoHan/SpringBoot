@@ -32,4 +32,5 @@ public class BoardEntity {
     @Column
     private int boardHits;
 
+
 }
