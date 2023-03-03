@@ -1,5 +1,6 @@
 package com.example.web_sty.dto;
 
+import com.example.web_sty.entity.BaseEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor      // 기본생성자
 @AllArgsConstructor     // 모든 필드를 매개변수로 하는 생성자
-public class BoardDTO {
+public class BoardDTO  {
     private Long id;
     private String boardWriter;
     private String boardPass;
