@@ -1,5 +1,6 @@
 package com.example.rest_book1.controller;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 // 테스트를 진행할때 JUnit에 내장된 실행자외에 다른 실행자를 실행시킨다.
 // 여기서는 SpringExtension라는 실행자를 사용
@@ -32,6 +33,7 @@ class HelloControllerTest {
     private MockMvc mvc;
 
     @Test
+    @DisplayName("hello 리턴 테스트")
     void hello() throws Exception {
         String hello = "hello";
 
@@ -46,5 +48,27 @@ class HelloControllerTest {
                 // 응답 본문의 내용을 검증
                 // Controller에서 "hello"를 리턴하기 때문에 이 값이 맞는지 검증
                 .andExpect(content().string(hello));
+    }
+
+    @Test
+    @DisplayName("helloDto 리턴 테스트")
+    public void helloDtoTest() throws Exception{
+        String name = "hello";
+        int amount = 1000;
+
+        mvc.perform(MockMvcRequestBuilders.get("/hello/dto")
+                // API 테스트 할 때 사용될 요청 파라미터를 설정합니다.
+                // 단 값은 String만 허용됩니다.
+                // 그래서 숫자/날짜 등의 데이터도 등록할 때는 문자열로 변경해야만 가능
+                .param("name", name)
+                .param("amount", String.valueOf(amount)))
+                .andExpect(status().isOk())
+                // jsonPath
+                // - JSON 응답값을 필드별로 검증할 수 있는 메소드
+                // - $를 기준으로 필드명을 명시합니다.
+                // - 여기서는 name과 amount를 검증하니 $.name, $.amount로 검증
+                .andExpect(jsonPath("$.name", is(name)))
+                .andExpect(jsonPath("$.amount", is(amount)));
+
     }
 }
