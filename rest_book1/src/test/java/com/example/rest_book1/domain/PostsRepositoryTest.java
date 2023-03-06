@@ -51,6 +51,7 @@ class PostsRepositoryTest {
 
         // then
         Posts posts = postsList.get(0);
+        log.info("게시물 보기 : " +posts);
         Assertions.assertThat(posts.getTitle()).isEqualTo(title);
         Assertions.assertThat(posts.getContent()).isEqualTo(content);
     }
