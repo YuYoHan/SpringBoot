@@ -1,8 +1,10 @@
 package com.example.rest_book1.domain;
 
+import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.annotation.After;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,12 +18,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
+@Log4j2
 class PostsRepositoryTest {
+
 
     @Autowired
     PostsRepository postsRepository;
 
-    @AfterAll
+    @AfterEach
     public void cleanUp() {
         postsRepository.deleteAll();
     }
