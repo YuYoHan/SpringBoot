@@ -20,4 +20,9 @@ public class PostsApiController {
     public Long update(@PathVariable Long id, @RequestBody PostsSaveRequestsDTO requestsDTO) {
         return postsService.update(id,requestsDTO);
     }
+
+    @GetMapping("/api/v1/posts/{id}")
+    public PostsResponseDTO findById(@PathVariable Long id) {
+        return postsService.findById(id);
+    }
 }

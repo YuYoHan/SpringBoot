@@ -15,4 +15,8 @@ public class PostsService {
     public Long save(PostsSaveRequestsDTO postsSaveRequestsDTO) {
         return postsRepository.save(postsSaveRequestsDTO.toEntity()).getId();
     }
+
+    public Long update(Long id, PostsSaveRequestsDTO requestsDTO) {
+
+    }
 }
