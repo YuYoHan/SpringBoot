@@ -2,6 +2,7 @@ package com.example.rest_book1.controller;
 
 import com.example.rest_book1.dto.PostsResponseDTO;
 import com.example.rest_book1.dto.PostsSaveRequestsDTO;
+import com.example.rest_book1.dto.PostsUpdateRequestDTO;
 import com.example.rest_book1.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class PostsApiController {
     }
 
     @PutMapping("/api/v1/posts/{id}")
-    public Long update(@PathVariable Long id, @RequestBody PostsSaveRequestsDTO requestsDTO) {
+    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDTO requestsDTO) {
         return postsService.update(id,requestsDTO);
     }
 
