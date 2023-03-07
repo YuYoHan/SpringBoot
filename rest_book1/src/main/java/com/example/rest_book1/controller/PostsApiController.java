@@ -1,5 +1,6 @@
 package com.example.rest_book1.controller;
 
+import com.example.rest_book1.dto.PostsResponseDTO;
 import com.example.rest_book1.dto.PostsSaveRequestsDTO;
 import com.example.rest_book1.service.PostsService;
 import lombok.RequiredArgsConstructor;
