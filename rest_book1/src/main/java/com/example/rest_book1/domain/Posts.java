@@ -3,6 +3,7 @@ package com.example.rest_book1.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -11,8 +12,10 @@ import javax.persistence.*;
 // 이 Entity 클래스의 수정을 통해 작업을 합니다.
 
 @Getter
+@ToString
 // 기본 생성자
 @NoArgsConstructor
+@Table(name = "posts")
 // JPA 어노테이션
 // 테이블과 링크될 클래스임을 나타냄
 // 기본값으로 클래스의 카멜케이스 이름을 언더스코어 네이밍(_)으로 테이블 이름을 매칭
