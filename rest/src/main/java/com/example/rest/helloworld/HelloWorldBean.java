@@ -1,4 +1,4 @@
-package com.example.rest.controller;
+package com.example.rest.helloworld;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

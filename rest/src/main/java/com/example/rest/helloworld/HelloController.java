@@ -1,4 +1,4 @@
-package com.example.rest.controller;
+package com.example.rest.helloworld;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
