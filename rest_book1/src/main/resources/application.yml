@@ -22,6 +22,9 @@ spring:
   freemarker:
     cache: false
 
+  mustache:
+    suffix: .mustache
+    prefix: classpath:/templates/
 
 
   datasource:
@@ -33,3 +36,4 @@ spring:
 logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type.descriptor: trace
+
