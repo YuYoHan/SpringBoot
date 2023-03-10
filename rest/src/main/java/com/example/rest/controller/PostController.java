@@ -43,4 +43,14 @@ public class PostController {
         }
         return posts;
     }
+
+    // 특정 게시글 조회
+    // Get요청이 들어왔을 때, value= "/{postId}"는 postId 게시글의 데이터를 조회하기 위해 설정
+    // ex) localhost:8080/posts/1
+    @GetMapping("/{postId}")
+    // PathVariable은 URI에 넘어온 postId 값을 가져오기 위해 사용
+    public Post getPost(@PathVariable String postId) {
+        // 데이터베이스에 연동이 따로 되어 있는 것이 없기 때문에 임시적으로 객체를 생성해서 넘겨줌
+        return new Post(postId, "title"+postId, "contents"+postId);
+    }
 }
