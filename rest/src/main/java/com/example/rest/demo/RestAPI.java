@@ -5,23 +5,24 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class RestAPI {
 
-    @GetMapping("")
-    public void GetAll() {
-
+    @GetMapping("/books")
+    public String GetAll() {
+        return "getall";
     }
 
-    @PostMapping("")
-    public void Add() {
-
+    @PostMapping("/add")
+    public String Add(@RequestBody Book book) {
+        return "add";
     }
 
-    @PutMapping("")
-    public void Update() {
-
+    @PutMapping("/update/{id}")
+    public String Update(@RequestBody Book book, @PathVariable int id) {
+        return "update";
     }
 
-    @DeleteMapping("")
-    public void del() {
-
+    @DeleteMapping("/delete/{id}")
+    public String del(@PathVariable int id
+    ) {
+        return "delete";
     }
 }
