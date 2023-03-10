@@ -53,4 +53,22 @@ public class PostController {
         // 데이터베이스에 연동이 따로 되어 있는 것이 없기 때문에 임시적으로 객체를 생성해서 넘겨줌
         return new Post(postId, "title"+postId, "contents"+postId);
     }
+
+    // Put요청이 들어왔을 때, value = "/{postId}"는 postId 게시글의 데이터를 수정하기 위해 설정
+    @PutMapping("/{postId}")
+    public ResponseEntity<Void> updatePost(@PathVariable String postId) {
+        log.info("updatePost");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //Delete 요청이 들어왔을 때, value = "/{postId}"는 postId 게시글의 데이터를 삭제하기 위해 설정
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<Void> deletePost(
+            @PathVariable String postId
+    ){
+        //Postman으로 요청했을 때 딱히 뜨는 메시지가 없어서 확인차 로그를 찍어봄
+        log.info("DeletePost");
+        //이 또한 데이터베이스가 연동되어 있지 않기 때문에 임시로 처리
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
