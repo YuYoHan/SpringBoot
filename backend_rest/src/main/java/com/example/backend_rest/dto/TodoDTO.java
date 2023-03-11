@@ -23,9 +23,4 @@ public class TodoDTO {
         this.done = todoEntity.isDone();
     }
 
-    /*
-    *
-    *
-    *
-    * */
 }
