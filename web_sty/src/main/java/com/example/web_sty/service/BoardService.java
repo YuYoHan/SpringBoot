@@ -1,6 +1,7 @@
 package com.example.web_sty.service;
 
 import com.example.web_sty.dto.BoardDTO;
+import com.example.web_sty.entity.BoardEntity;
 import com.example.web_sty.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     public void save(BoardDTO boardDTO) {
-
-        boardRepository.save();
+        BoardEntity boardEntity = BoardEntity.toSaveEntity(boardDTO);
+        boardRepository.save(boardEntity);
     }
 }

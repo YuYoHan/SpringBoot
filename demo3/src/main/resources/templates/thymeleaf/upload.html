@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>파일 업로드</title>
+</head>
+<body>
+<h2>파일 업로드</h2>
+<form th:action="@{/upload}" th:method="post"  enctype="multipart/form-data">
+    <h4>단일 파일 업로드</h4>
+    <input type="file" name="file">
+
+    <h4>다중 파일 업로드</h4>
+    <!--    multiple="multiple" 은 원래 type="file"의 input은 기본적으로 하나의 파일만
+            선택 가능한데 위의 속성을 적용해주면 여러 개의 파일을 선택할 수 있도록 해준다.-->
+    <input type="file" multiple="multiple" name="files">
+    <input type="submit" />
+</form>
+</body>
+</html>
