@@ -13,8 +13,20 @@ create table board(
     userId varchar(300),
     regDate datetime default now(),
     updateDate datetime default now(),
+    constraint user_id_fk foreign key (userId) references user(userId)
+);
+
+create table spring_reply(
+    replyNum bigint primary key auto_increment,
+    userId varchar(300),
+    replyContents varchar(4000) not null,
+    regDate datetime default now(),
+    updateDate datetime default now(),
+    boardNum bigint,
+    constraint reply_id_fk foreign key (userId) references user(userId),
     constraint board_id_fk foreign key (userId) references user(userId)
 );
+
 
 select * from board;
 select * from user;
