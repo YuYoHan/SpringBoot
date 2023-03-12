@@ -30,7 +30,7 @@ create table spring_reply(
 
 select * from board;
 select * from user;
-drop table board;
+drop table user;
 
 insert into board (boardTitle, boardContents, userId)
 values	('테스트 제목1', 'apple이 작성한 테스트 내용1', 'apple'),
