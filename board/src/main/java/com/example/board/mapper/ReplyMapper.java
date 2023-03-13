@@ -12,4 +12,5 @@ public interface ReplyMapper {
     int update(ReplyDTO replyDTO);
 
     List<ReplyDTO> getList(@Param("cri")Criteria cri, @Param("boardNum") Long boardNum);
+    int getTotal(Long boardNum);
 }
