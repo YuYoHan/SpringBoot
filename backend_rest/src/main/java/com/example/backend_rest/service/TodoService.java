@@ -1,5 +1,8 @@
 package com.example.backend_rest.service;
 
+import com.example.backend_rest.model.TodoEntity;
+import com.example.backend_rest.persistence.TodoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /*
@@ -13,11 +16,16 @@ import org.springframework.stereotype.Service;
 // 여기가 서비스 레이어라고 알려주는 어노테이션
 @Service
 public class TodoService {
+    @Autowired
+    private TodoRepository todoRepository;
 
-    /*
-    *   service를 만들었으니 TodoController 작성
-    * */
     public String testService() {
-        return "Test Service";
+        // TodoEntity 생성
+        TodoEntity todoEntity = TodoEntity.builder().title("My first todo item").build();
+        // TodoEntity 저장
+        todoRepository.save(todoEntity);
+        // TodoEntity 검색
+        TodoEntity savedEntity = todoRepository.findById(todoEntity.getId()).get();
+        return savedEntity.getTitle();
     }
 }
