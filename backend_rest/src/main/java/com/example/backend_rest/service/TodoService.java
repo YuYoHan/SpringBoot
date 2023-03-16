@@ -35,15 +35,8 @@ public class TodoService {
 
     public List<TodoEntity> create(final TodoEntity todoEntity) {
         // Validations
-        if(todoEntity == null) {
-            log.warn("Entity cannot be null");
-            throw new RuntimeException("Entity cannot be null");
-        }
+        validate(todoEntity);
 
-        if(todoEntity.getUserId() == null) {
-            log.warn("Unknown user");
-            throw new RuntimeException("Unknown user");
-        }
         // save : 엔티티를 데이터베이스에 저장한다.
         todoRepository.save(todoEntity);
 
@@ -51,5 +44,17 @@ public class TodoService {
 
         // 저장된 엔티티를 포함해서 새 리스트를 리턴한다.
         return todoRepository.findByUserId(todoEntity.getUserId());
+    }
+
+    // 리팩토링한 메서드
+    private void validate(final TodoEntity todoEntity) {
+        if(todoEntity == null) {
+            log.warn("Entity cannot be null");
+            throw new RuntimeException("Entity cannot be null");
+        }
+        if(todoEntity.getUserId() == null) {
+            log.warn("Unknown user");
+            throw new RuntimeException("Unknown user");
+        }
     }
 }
