@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /*
 *   서비스 레이어는 컨트롤러와 퍼시스턴스 사이에서 비즈니스 로직을
@@ -63,5 +64,26 @@ public class TodoService {
         return todoRepository.findByUserId(userId);
     }
 
+    public List<TodoEntity> update(final TodoEntity todoEntity) {
+        // 저장할 엔티티가 유효한지 확인
+        validate(todoEntity);
+
+        // 넘겨받은 엔티티 id를 이용해 TodoEntity를 가져온다.
+        // 존재하지 않는 엔티티는 업데이트할 수 없기 때문이다.
+        final Optional<TodoEntity> optionalTodoEntity = todoRepository.findById(todoEntity.getId());
+
+        optionalTodoEntity.ifPresent(todo -> {
+            // 변환된 TodoEntity가 존재하면 값을 새 entity의 값으로 덮어 씌운다.
+            todo.builder()
+                    .title(todoEntity.getTitle())
+                    .done(todoEntity.isDone())
+                    .build();
+
+            // 데이터베이스에 새 값을 저장
+            todoRepository.save(todo);
+        });
+        // Retrieve Todo에서 만든 메서드를 이용해 유저의 모든 Todo 리스트를 리턴한다.
+        return retrieve(todoEntity.getUserId());
+    }
 
 }
