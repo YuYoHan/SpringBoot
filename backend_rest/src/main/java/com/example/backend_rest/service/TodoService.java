@@ -48,7 +48,7 @@ public class TodoService {
 
     // 리팩토링한 메서드
     private void validate(final TodoEntity todoEntity) {
-        if(todoEntity == null) {
+        if(todoEntity  == null) {
             log.warn("Entity cannot be null");
             throw new RuntimeException("Entity cannot be null");
         }

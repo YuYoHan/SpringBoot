@@ -15,12 +15,19 @@ public class TodoDTO {
     private boolean done;
 
     @Builder
-
     public TodoDTO(final TodoEntity todoEntity) {
         this.id = todoEntity.getId();
         this.title = todoEntity.getTitle();
         // isDone인 이유는 set은 setDone인데 get은 isDone이다.
         this.done = todoEntity.isDone();
+    }
+
+    public static TodoEntity todoEntity(final TodoDTO todoDTO) {
+        return TodoEntity.builder()
+                .id(todoDTO.getId())
+                .title(todoDTO.title)
+                .done(todoDTO.isDone())
+                .build();
     }
 
 }
