@@ -1,13 +1,11 @@
 package com.example.backend_rest.dto;
 
 import com.example.backend_rest.model.TodoEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 public class TodoDTO {
     private String id;
