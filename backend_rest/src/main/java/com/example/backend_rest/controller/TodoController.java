@@ -37,7 +37,7 @@ public class TodoController {
             // 1. TodoEntity로 변환
             TodoEntity entity = TodoDTO.todoEntity(todoDTO);
 
-            entity.builder()
+            TodoEntity entity1 = TodoEntity.builder()
                     // 2. id를 null로 초기화한다. 생성 당시에는 id가 없어야 하기 때문이다.
                     .id(null)
                     // 3. 임시 유저 아이디를 설정해준다.
@@ -46,7 +46,7 @@ public class TodoController {
                     .build();
 
             // 4. 서비스를 이용해 Todo 엔티티를 생성한다.
-            List<TodoEntity> entities = service.create(entity);
+            List<TodoEntity> entities = service.create(entity1);
 
             // 5. 자바 스트림을 이용해 리턴된 엔티티 리스트를 TodoDTO 리스트로 변환
             /*
@@ -94,11 +94,11 @@ public class TodoController {
         // 1. dto를 entity로 변환
         TodoEntity todoEntity = TodoDTO.todoEntity(dto);
         // 2. id를 temporaryUserId로 초기화한다.
-        todoEntity.builder()
+        TodoEntity entity1 = TodoEntity.builder()
                 .userId(temporaryUserId).build();
 
         // 3. 서비스를 이용해 entity를 업데이트한다.
-        List<TodoEntity> entities = service.update(todoEntity);
+        List<TodoEntity> entities = service.update(entity1);
 
         // 4. 자바 스트림을 이용해 리턴된 엔티티 리스트를 TodoDTO 리스트로 변환
         List<TodoDTO> dtos = entities.stream().map(TodoDTO :: new).collect(Collectors.toList());
