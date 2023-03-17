@@ -23,6 +23,18 @@ public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
+    // 리팩토링한 메서드
+    private void validate(final TodoEntity todoEntity) {
+        if(todoEntity  == null) {
+            log.warn("Entity cannot be null");
+            throw new RuntimeException("Entity cannot be null");
+        }
+        if(todoEntity.getUserId() == null) {
+            log.warn("Unknown user");
+            throw new RuntimeException("Unknown user");
+        }
+    }
+
     public String testService() {
         // TodoEntity 생성
         TodoEntity todoEntity = TodoEntity.builder().title("My first todo item").build();
@@ -46,15 +58,5 @@ public class TodoService {
         return todoRepository.findByUserId(todoEntity.getUserId());
     }
 
-    // 리팩토링한 메서드
-    private void validate(final TodoEntity todoEntity) {
-        if(todoEntity  == null) {
-            log.warn("Entity cannot be null");
-            throw new RuntimeException("Entity cannot be null");
-        }
-        if(todoEntity.getUserId() == null) {
-            log.warn("Unknown user");
-            throw new RuntimeException("Unknown user");
-        }
-    }
+
 }
