@@ -86,4 +86,27 @@ public class TodoController {
         // ResponseDTO를 리턴한다.
         return ResponseEntity.ok().body(responseDTO);
     }
+
+    @PutMapping
+    public ResponseEntity<?> updateTodo(@RequestBody TodoDTO dto) {
+        String temporaryUserId = "temporary-user";
+
+        // 1. dto를 entity로 변환
+        TodoEntity todoEntity = TodoDTO.todoEntity(dto);
+        // 2. id를 temporaryUserId로 초기화한다.
+        todoEntity.builder()
+                .userId(temporaryUserId).build();
+
+        // 3. 서비스를 이용해 entity를 업데이트한다.
+        List<TodoEntity> entities = service.update(todoEntity);
+
+        // 4. 자바 스트림을 이용해 리턴된 엔티티 리스트를 TodoDTO 리스트로 변환
+        List<TodoDTO> dtos = entities.stream().map(TodoDTO :: new).collect(Collectors.toList());
+
+        // 5. 변환된 TodoDTO 리스트를 이용해 ResponseDTO를 초기화한다.
+        ResponseDTO<TodoDTO> responseDTO = ResponseDTO.<TodoDTO>builder().data(dtos).build();
+
+        // 6. ResponseDTO를 리턴
+        return ResponseEntity.ok().body(responseDTO);
+    }
 }
