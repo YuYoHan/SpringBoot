@@ -37,16 +37,11 @@ public class TodoController {
             // 1. TodoEntity로 변환
             TodoEntity entity = TodoDTO.todoEntity(todoDTO);
 
-            TodoEntity entity1 = TodoEntity.builder()
-                    // 2. id를 null로 초기화한다. 생성 당시에는 id가 없어야 하기 때문이다.
-                    .id(null)
-                    // 3. 임시 유저 아이디를 설정해준다.
-                    // 지금은 인증과 인가 기능이 없으므로 한 유저만 로그인 없이 사용 가능한 애플리케이션이다.
-                    .userId(temporaryUserId)
-                    .build();
+            entity.setId(null);
+            entity.setUserId(temporaryUserId);
 
             // 4. 서비스를 이용해 Todo 엔티티를 생성한다.
-            List<TodoEntity> entities = service.create(entity1);
+            List<TodoEntity> entities = service.create(entity);
 
             // 5. 자바 스트림을 이용해 리턴된 엔티티 리스트를 TodoDTO 리스트로 변환
             /*
@@ -94,11 +89,10 @@ public class TodoController {
         // 1. dto를 entity로 변환
         TodoEntity todoEntity = TodoDTO.todoEntity(dto);
         // 2. id를 temporaryUserId로 초기화한다.
-        TodoEntity entity1 = TodoEntity.builder()
-                .userId(temporaryUserId).build();
+        todoEntity.setUserId(temporaryUserId);
 
         // 3. 서비스를 이용해 entity를 업데이트한다.
-        List<TodoEntity> entities = service.update(entity1);
+        List<TodoEntity> entities = service.update(todoEntity);
 
         // 4. 자바 스트림을 이용해 리턴된 엔티티 리스트를 TodoDTO 리스트로 변환
         List<TodoDTO> dtos = entities.stream().map(TodoDTO :: new).collect(Collectors.toList());
@@ -118,16 +112,10 @@ public class TodoController {
             // 1. TodoEntity로 변환
             TodoEntity entity = TodoDTO.todoEntity(dto);
 
-            TodoEntity entity1 = TodoEntity.builder()
-                    // 2. id를 null로 초기화한다. 생성 당시에는 id가 없어야 하기 때문이다.
-                    .id(null)
-                    // 3. 임시 유저 아이디를 설정해준다.
-                    // 지금은 인증과 인가 기능이 없으므로 한 유저만 로그인 없이 사용 가능한 애플리케이션이다.
-                    .userId(temporaryUserId)
-                    .build();
+            entity.setUserId(temporaryUserId);
 
             // 4. 서비스를 이용해 Todo 엔티티를 생성한다.
-            List<TodoEntity> entities = service.delete(entity1);
+            List<TodoEntity> entities = service.delete(entity);
 
             // 5. 자바 스트림을 이용해 리턴된 엔티티 리스트를 TodoDTO 리스트로 변환
             /*
