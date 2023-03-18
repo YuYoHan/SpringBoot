@@ -4,6 +4,13 @@ import { Button, Grid, TextField } from "@mui/material";
 const AddTodo = (props) => {
     // 사용자의 입력을 저장할 오브젝트
     const [item, setItem] = useState({ title: "" });
+    const addItem = props.addItem;
+
+    // onButtonClick 함수 작성
+    const onButtonClick = () => {
+        addItem(item); // addItem 함수 사용
+        setItem({ title: "" });
+    };
 
     // onInputChange 함수 작성
     const onInputChange = (e) => {
@@ -28,6 +35,7 @@ const AddTodo = (props) => {
                     style={{ height: "100%" }}
                     color="secondary"
                     variant="outlined"
+                    onClick={onButtonClick}
                 >
                     +
                 </Button>
