@@ -14,11 +14,23 @@ public class HelloController {
         return "Hello World";
     }
 
+    /*
+        return
+    *       {
+    *           "message": "Hello World"
+    *       }
+    * */
     @GetMapping("/hello-bean")
     public HelloWorldBean helloWorldBean() {
         return new HelloWorldBean("Hello World");
     }
 
+    /*
+    *   return
+    *       {
+    *          "message": "Hello World, 채원"
+    *       }
+    * */
     @GetMapping("/hello-world-bean/path-variable/{name}")
     public HelloWorldBean helloWorldBean(@PathVariable String name) {
         return new HelloWorldBean(String.format("Hello World, %s", name));
