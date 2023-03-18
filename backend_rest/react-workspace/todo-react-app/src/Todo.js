@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { ListItem, ListItemText, InputBase, Checkbox } from "@mui/material";
+import {
+    ListItem,
+    ListItemText,
+    InputBase,
+    Checkbox,
+    ListItemSecondaryAction,
+    IconButton,
+} from "@mui/material";
+import { DeleteOutlined } from "@mui/icons-material";
 
 const Todo = (props) => {
     // useState는 리액트의 훅중 하나이며 함수형 컴포넌트에서 상태 변수를 사용할 수 있도록 해줌
@@ -25,6 +33,11 @@ const Todo = (props) => {
                     fullWidth={true}
                 />
             </ListItemText>
+            <ListItemSecondaryAction>
+                <IconButton aria-label="Delete Todo">
+                    <DeleteOutlined />
+                </IconButton>
+            </ListItemSecondaryAction>
         </ListItem>
     );
 };
