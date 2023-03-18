@@ -3,6 +3,10 @@ package com.example.shopping_.service;
 import com.example.shopping_.entity.Member;
 import com.example.shopping_.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.Validate;
@@ -16,7 +20,8 @@ import org.thymeleaf.util.Validate;
 // 빈 주입 방법중 한 개인데
 // @NonNull 이나 final 붙은 필드에 생성자를 생성
 @RequiredArgsConstructor
-public class MemberService {
+// MemberService가 UserDetailsService를 구현합니다.
+public class MemberService implements UserDetailsService {
 
     // 생성자가 1개이므로 @Autowired를 생략 가능
     private final MemberRepository memberRepository;
@@ -36,5 +41,24 @@ public class MemberService {
         if (findMember != null) {
             throw new IllegalStateException("이미 가입된 회원입니다.");
         }
+    }
+
+    // UserDetailsService 인터페이스의 loadUserByUsernmae() 메소드를 오버라이딩합니다.
+    // 로그인할 유저의 email을 파라미터로 전달 받습니다.
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Member member = memberRepository.findByEmail(email);
+
+        if(member == null) {
+            throw new UsernameNotFoundException(email);
+        }
+
+        // UserDetail을 구현하고 있는 User 객체를 반환해줍니다.
+        // User 객체를 생성하기 위해서 생성자로 회원의 메일, 비밀번호, role을 파라미터로 넘겨줌
+        return User.builder()
+                .username(member.getEmail())
+                .password(member.getPassword())
+                .roles(member.getRole().toString())
+                .build();
     }
 }
