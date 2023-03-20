@@ -1,6 +1,6 @@
 package com.example.rest.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.rest.exception.UserNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
