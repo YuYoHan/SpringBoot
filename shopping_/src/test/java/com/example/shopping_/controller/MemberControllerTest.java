@@ -59,4 +59,16 @@ class MemberControllerTest {
                 // 로그인이 성공하여 인증되었으면 테스트 코드가 통과합니다.
                 .andExpect(SecurityMockMvcResultMatchers.authenticated());
     }
+
+    @Test
+    @DisplayName("로그인실패 테스트")
+    public void loginFailTest() throws Exception {
+        String email = "test@email.com";
+        String password = "1234";
+        this.createMember(email, password);
+        mockMvc.perform(formLogin().userParameter("email")
+                .loginProcessingUrl("/member/login")
+                .user(email).password("12345"))
+                .andExpect(SecurityMockMvcResultMatchers.authenticated());
+    }
 }

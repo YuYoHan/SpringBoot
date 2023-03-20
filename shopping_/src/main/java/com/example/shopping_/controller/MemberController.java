@@ -22,7 +22,7 @@ public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
-    @GetMapping("/new")
+    @GetMapping("new")
     private String memberForm(Model model){
         model.addAttribute("memberFormDTO", new MemberFormDTO());
         return "member/memberForm";
@@ -52,11 +52,11 @@ public class MemberController {
 
     @GetMapping("/login")
     public String loginMember() {
-        return "/member/memberLoginForm";
+        return "member/memberLoginForm";
     }
     @GetMapping("/login/error")
     public String loginError(Model model) {
         model.addAttribute("loginErrorMsg", "아이디 or 비밀번호를 확인해주세요");
-        return "/member/memberLoginForm";
+        return "member/memberLoginForm";
     }
 }
