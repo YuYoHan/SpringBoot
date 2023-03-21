@@ -1,3 +1,4 @@
+create database study01;
 use study01;
 
 create table user(
@@ -37,8 +38,3 @@ values	('테스트 제목1', 'apple이 작성한 테스트 내용1', 'apple'),
           ('테스트 제목2', 'banana이 작성한 테스트 내용2', 'banana'),
           ('테스트 제목3', 'cheery이 작성한 테스트 내용3', 'cheery'),
           ('테스트 제목4', 'durian이 작성한 테스트 내용4', 'durian');
-
-insert into user
-values ("cheery", "zxzz12", "김체리"),
-       ("durian","zxzz12", "듀리안");
-insert into board (boardTitle, boardContents, userId) (select boardTitle, boardContents,userId from board);
