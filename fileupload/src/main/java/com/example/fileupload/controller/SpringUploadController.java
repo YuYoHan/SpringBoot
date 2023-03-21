@@ -36,6 +36,8 @@ public class SpringUploadController {
         log.info("multipartFile={}", file);
 
         if(!file.isEmpty()) {
+            // .getOriginalFilename()   : 업로드 파일 명
+            // .transferTo              : 파일 저장
             String fullPath = fileDir + file.getOriginalFilename();
             log.info("파일 저장 fullPath={}", fullPath);
 
