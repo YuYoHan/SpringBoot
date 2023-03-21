@@ -161,7 +161,9 @@
         showList(1);
     })
     function showList(pageNum) {
-
+        replyService.getList(
+            {boardNum:boardNum, pageNum:pageNum || 1} 
+        )
     }
 </script>
 </body>
