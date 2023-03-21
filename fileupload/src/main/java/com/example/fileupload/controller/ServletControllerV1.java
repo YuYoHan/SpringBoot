@@ -15,7 +15,7 @@ import java.util.Collection;
 @Controller
 @Slf4j
 @RequestMapping("/servlet/v1")
-public class ServletController {
+public class ServletControllerV1 {
     @GetMapping("/upload")
     public String newFile() {
         return "upload-form";
