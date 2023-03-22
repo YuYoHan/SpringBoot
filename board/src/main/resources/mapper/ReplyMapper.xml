@@ -6,7 +6,7 @@
 <mapper namespace="com.example.mapper.ReplyMapper">
 	<select id="getList" resultType="com.example.board.domain.ReplyDTO">
 		select * from spring_reply where boardNum = #{boardNum}
-			limit #{cri.startrow}, #{cri.amount}
+			limit #{cri.startrow}, #{cri.amount} # 댓글은 오래된게 위로가야하기 때문
 	</select>
 </mapper>
 
