@@ -162,7 +162,14 @@
     })
     function showList(pageNum) {
         replyService.getList(
-            {boardNum:boardNum, pageNum:pageNum || 1}
+            {boardNum:boardNum, pageNum:pageNum || 1},
+            function (replyCnt, list) {
+                if(list == null || list.length == 0) {
+                    // 현재 게시글에 달린 댓글이 없다는 뜻
+                    return;
+                }
+                // DOM 구현
+            }
         )
     }
 </script>
