@@ -156,6 +156,9 @@
 <script src="/js/main.js"></script>
 <script>
     let pageNum = 0;
+    let boardNum = "${board.boardNum}";
+    const replies = $(".replies")
+    let maxCnt = 0;
     $(document).ready(function (){
         pageNum = 1;
         showList(1);
@@ -169,6 +172,13 @@
                     return;
                 }
                 // DOM 구현
+                let str = "";
+                maxCnt = replyCnt;
+                for (let i = 0; i < list.length; i++) {
+                    str += '<li style="clear:both;" class="li' + list[i].replyNum + '">';
+                    str += '<div style="display:inline; float:left; width:80%;">';
+                    str += '<strong class="userId'+ list[i].replyNum+ '">' + list[i].userId + '</strong>';
+                }
             }
         )
     }
