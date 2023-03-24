@@ -3,6 +3,7 @@ package com.example.backend_rest.controller;
 import com.example.backend_rest.dto.ResponseDTO;
 import com.example.backend_rest.dto.UserDTO;
 import com.example.backend_rest.model.UserEntity;
+import com.example.backend_rest.security.TokenProvider;
 import com.example.backend_rest.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private TokenProvider tokenProvider;
 
     @PostMapping("/signUp")
     public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
@@ -52,10 +55,13 @@ public class UserController {
         );
 
         if(user != null) {
+            final String token = tokenProvider.create(user);
             final UserDTO responseUserDTO = UserDTO.builder()
                     .userName(user.getUsername())
                     .id(user.getId())
+                    .token(token)
                     .build();
+
             return ResponseEntity.ok().body(responseUserDTO);
         } else  {
             ResponseDTO responseDTO = ResponseDTO.builder()
