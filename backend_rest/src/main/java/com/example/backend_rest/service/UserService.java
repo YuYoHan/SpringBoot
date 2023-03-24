@@ -18,6 +18,14 @@ public class UserService {
             throw new RuntimeException("Invalid arguments");
         }
         final  String userName = userEntity.getUsername();
-        if
+        if(userRepository.existsByUsername(userName)) {
+            log.warn("UserName already exists {}", userName);
+            throw new RuntimeException("UserName already exists");
+        }
+        return userRepository.save(userEntity);
+    }
+
+    public UserEntity getByCredentials(final String userName, final String password) {
+        return userRepository.findByUsernameAndPassword(userName, password);
     }
 }

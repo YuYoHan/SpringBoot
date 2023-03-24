@@ -159,6 +159,7 @@
     let boardNum = "${board.boardNum}";
     const replies = $(".replies")
     let maxCnt = 0;
+    const loginUser = "${loginUser}";
     $(document).ready(function (){
         pageNum = 1;
         showList(1);
@@ -178,6 +179,12 @@
                     str += '<li style="clear:both;" class="li' + list[i].replyNum + '">';
                     str += '<div style="display:inline; float:left; width:80%;">';
                     str += '<strong class="userId'+ list[i].replyNum+ '">' + list[i].userId + '</strong>';
+                    str += '<p class="reply'+list[i].replyNum+'">'+list[i].replyContents+'</p></div>'
+                    str += '<div style="text-align:right;">'
+                    str += '<strong>'+replyService.displayTime(list[i])+'</strong>'
+                    if(list[i].userId == loginUser) {
+                        str += '<a href="'+list[i].replyNum+'"class=modify'>수정</a>'
+                    }
                 }
             }
         )
