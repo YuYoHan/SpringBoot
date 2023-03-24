@@ -23,7 +23,7 @@ public class Criteria {
     public Criteria(int pageNum, int amount) {
         this.pageNum = pageNum;
         this.amount = amount;
-        this.startrow =0;
+        this.startrow =(this.pageNum -1) * this.amount;
     }
 
     public void setPageNum(int pageNum) {
