@@ -1,11 +1,10 @@
 package com.example.backend_rest.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@ToString
+@Setter
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
