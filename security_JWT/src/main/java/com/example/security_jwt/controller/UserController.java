@@ -31,13 +31,19 @@ public class UserController {
         return "manager";
     }
 
-    @GetMapping("/joinForm")
+    @GetMapping("/login")
+    public String loginForm() {
+        return "/loginForm";
+    }
+
+    @GetMapping("/join")
     public String joinForm() {
         return "joinForm";
     }
-    @GetMapping("/loginForm")
-    public String loginForm() {
-        return "loginForm";
+
+    @GetMapping("/joinProc")
+    public @ResponseBody String joinProc() {
+        return "회원가입 완료됨!";
     }
 
     @PostMapping("/join")
