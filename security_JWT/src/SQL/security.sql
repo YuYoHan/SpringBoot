@@ -2,3 +2,5 @@ create user 'cos'@'%' identified by 'cos1234';
 grant all privileges on *.* to 'cos'@'%';
 create database security;
 use security;
+
+desc user;
