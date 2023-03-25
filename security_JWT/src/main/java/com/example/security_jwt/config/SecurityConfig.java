@@ -31,6 +31,10 @@ public class SecurityConfig {
          // 특정한 경로에 특정한 권한을 가진 사용자만 접근할 수 있도록 아래의 메소드를 이용합니다.
          http.authorizeRequests()
                  // antMatchers()는 특정한 경로를 지정합니다.
+                 // antMatchers 메소드는 요청 타입을 의미
+                 // URL이 user뒤에 오는 모든 것을 .authenticated() 메소드가 적용되는데
+                 // 해당 메소드는 로그인 된 상태를 의미합니다.
+                 // 그러므로 /user/*는 로그인된 상태에서만 접근 가능합니다.
                  .antMatchers("/user/**").authenticated()
                  // hasRole()은 시스템상에서 특정 권한을 가진 사람만이 접근할 수 있음
                  .antMatchers("/manager/**").access(
