@@ -14,11 +14,15 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setId(1L);
-            member.setName("Hello");
+            Member findMember = entityManager.find(Member.class, 1L);
 
-            entityManager.persist(member);
+            // permit()을 안해도 데이터베이스의 name이 변경되었다.
+            // Hello → HelloJPA
+            findMember.setName("HelloJPA");
+
+            // 삭제
+//            entityManager.remove(findMember);
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
