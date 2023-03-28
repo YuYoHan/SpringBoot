@@ -1,10 +1,13 @@
 package com.example.board2.entity;
 
+import com.example.board2.common.EntityDate;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
+
 import static java.util.stream.Collectors.toSet;
 
 @Entity
@@ -16,7 +19,7 @@ import static java.util.stream.Collectors.toSet;
 // PROTECTED로 설정해 두었습니다.
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 // EntityDate는 데이터가 생성된 시간, 수정된 시간을 자동으로 업데이트해주기 위해 사용
-public class Member extends EntityDate{
+public class Member extends EntityDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
@@ -56,7 +59,7 @@ public class Member extends EntityDate{
         this.password = password;
         this.userName = userName;
         this.nickName = nickName;
-        this.roles = roles.stream().map(r -> new MemberRole(this, r)).collect(toSet());
+        this.roles = roles.stream().map(r -> new MemberRole(this, r.getRole())).collect(toSet());
     }
 
     // 닉네임을 업데이트 할 수 있는 요구사항을 충족하기 위해, 업데이트 메소드를 작성
