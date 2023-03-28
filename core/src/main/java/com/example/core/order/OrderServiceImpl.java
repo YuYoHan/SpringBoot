@@ -1,13 +1,14 @@
 package com.example.core.order;
 
 import com.example.core.discount.DiscountPolicy;
+import com.example.core.discount.FixDiscountPolicy;
 import com.example.core.member.Member;
 import com.example.core.member.MemberRepository;
 import com.example.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
 
     // 여기서 문제점은 클라이언트인 OrderServiceImpl이 DiscountPolicy 인터페이스뿐만아니라  FixDiscountPolicy인
     // 구체 클래스도 함께 의존하고 있다. 이것은 DIP 위반이다.
@@ -21,6 +22,10 @@ public class OrderServiceImpl implements OrderService{
 
     private DiscountPolicy discountPolicy;
 
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order creatOrder(long memberId, String itemName, int itemPrice) {
