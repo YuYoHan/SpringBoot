@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/test
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: //localhost:3306/board
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: create
@@ -13,3 +13,7 @@ spring:
       enabled: true
     restart:
       enabled: true
+
+mybatis:
+  mapper-locations: mybatis/mapper/**/*.xml
+  type-aliases-package: com.example.board2.mapper

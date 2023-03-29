@@ -1,13 +1,13 @@
-package com.example.board2;
+package com.example.fileupload2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Board2Application {
+public class Fileupload2Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Board2Application.class, args);
+        SpringApplication.run(Fileupload2Application.class, args);
     }
 
 }
