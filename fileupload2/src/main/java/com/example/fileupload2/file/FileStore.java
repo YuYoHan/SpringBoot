@@ -13,19 +13,17 @@ import java.util.UUID;
 
 @Component
 public class FileStore {
-
-    @Value("c:/upload/file/")
+    @Value("${file.dir}")
     private String fileDir;
 
-    public String getFullPath(String fileName) {
-        return fileDir + fileName;
+    public String getFullPath(String filename) {
+        return fileDir + filename;
     }
 
     public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
         List<UploadFile> storeFileResult = new ArrayList<>();
-        for (MultipartFile multipartFile: multipartFiles
-             ) {
-            if(!multipartFile.isEmpty()) {
+        for (MultipartFile multipartFile : multipartFiles) {
+            if (!multipartFile.isEmpty()) {
                 storeFileResult.add(storeFile(multipartFile));
             }
         }
@@ -36,22 +34,21 @@ public class FileStore {
         if (multipartFile.isEmpty()) {
             return null;
         }
-        String originFileName = multipartFile.getOriginalFilename();
 
-        // 서버 내부에서 관리하는 파일명은 유일한 이름을 생성하는 UUID를 사용
-        String storeFileName = createSoreFileName(originFileName);
-        multipartFile.transferTo(new File(getFullPath(storeFileName)));
-        return new UploadFile(originFileName, storeFileName);
+        String originalFilename = multipartFile.getOriginalFilename();
+        String storeFilename = createStoreFileName(originalFilename);
+        multipartFile.transferTo(new File(getFullPath(storeFilename)));
+        return new UploadFile(originalFilename, storeFilename);
     }
 
-    private String createSoreFileName(String originalFileName) {
-        // 확장자를 별도로 추출해서 서버 내부에서 관리하는 파일명에도 붙여준다.
-        String ext = extractExt(originalFileName);
+    private String createStoreFileName(String originalFilename) {
+        String ext = extractExt(originalFilename);
         String uuid = UUID.randomUUID().toString();
-        return  uuid + "."+ ext;
+        return uuid + "." + ext;
     }
-    private String extractExt(String originalFileName) {
-        int pos = originalFileName.lastIndexOf(".");
-        return originalFileName.substring(pos +1);
+
+    private String extractExt(String originalFilename) {
+        int pos = originalFilename.lastIndexOf(".");
+        return originalFilename.substring(pos + 1);
     }
 }
