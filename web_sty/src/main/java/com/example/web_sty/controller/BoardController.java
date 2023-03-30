@@ -36,7 +36,7 @@ public class BoardController {
         // DB에서 전체 게시글 데이터를 가져와서 list.html에 보여준다.
         List<BoardDTO> boardDTOList = boardService.findAll();
         model.addAttribute("boardList", boardDTOList);
-        return "list";
+        return "/board/list";
     }
 
     @GetMapping("/{id}")
@@ -44,7 +44,10 @@ public class BoardController {
         /*
         *   해당 게시글의 조회수를 하나 올리고
         *   게시글 데이터를 가져와서 detail.html에 출력
-        *
         * */
+        boardService.updateHits(id);
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
+        return "/board/detail";
     }
 }
