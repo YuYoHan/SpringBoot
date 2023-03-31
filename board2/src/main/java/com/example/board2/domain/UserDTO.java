@@ -10,6 +10,8 @@ import javax.validation.constraints.Pattern;
 @Getter
 @ToString
 public class UserDTO {
+
+    private Long id;
     @NotBlank(message = "아이디는 필 수 입니다.")
     private String userId;
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
