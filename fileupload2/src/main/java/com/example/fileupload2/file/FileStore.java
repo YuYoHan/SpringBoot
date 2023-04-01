@@ -21,6 +21,7 @@ public class FileStore {
         return fileDir + filename;
     }
 
+    // 여러개의 파일을 담을 때
     public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
         List<UploadFile> storeFileResult = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
