@@ -46,6 +46,8 @@ public class FileStore {
         // "qwe-qwe-123-qqwe.png";을 넘기면 getFullPath 메소드에서
         // "c:/upload/file/qwe-qwe-123-qqwe.png";이렇게 합쳐진다.
         multipartFile.transferTo(new File(getFullPath(storeFilename)));
+        // 사용자가 업로드한 파일 이름과 "qwe-qwe-123-qqwe.png";을
+        // UploadFile에 보내준다.
         return new UploadFile(originalFilename, storeFilename);
     }
 

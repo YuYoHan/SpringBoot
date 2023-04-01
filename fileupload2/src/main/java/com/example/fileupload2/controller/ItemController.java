@@ -37,13 +37,21 @@ public class ItemController {
 
     @PostMapping("/items/new")
     public String saveItem(@ModelAttribute ItemForm form, RedirectAttributes redirectAttributes) throws IOException {
+        // ItemForm에서 MultipartFile 타입으로 들어간 attachFile을 가져오고
+        // storeFile 메소드에 넣어준다. 그러면 UploadFile에
+        // 사용자가 등록한 파일명과 서버에서 관리하는 파일명 두 개가 등록이 된다.
         UploadFile attachFile = fileStore.storeFile(form.getAttachFile());
+        // FileStore에 ItemForm List<MultipartFile>로 이미지를 여러개 넣은 것을
+        // 넣어준다. 그리고 그것을 List<UploadFile>에 넣어준다.
         List<UploadFile> storeImageFiles = fileStore.storeFiles(form.getImageFiles());
 
         //데이터베이스에 저장
+        // 파일 이름(사용자가 등록할 때 적을 이름), 파일 등록할 때 이름, 이미지 파일들을 Item에 넣어줌
         Item item = new Item(form.getItemName(), attachFile, storeImageFiles);
+        // JPA에 있는 save 메소드를 사용해서 DB에 저장
         itemRepository.save(item);
 
+        // return이 redirect이기 때문에 redirectAttributes를 사용해서 값을 넣어줌
         redirectAttributes.addAttribute("itemId", item.getId());
 
         return "redirect:/items/{itemId}";

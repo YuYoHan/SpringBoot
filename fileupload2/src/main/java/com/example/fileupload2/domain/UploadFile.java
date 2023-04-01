@@ -10,7 +10,9 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public class UploadFile {
+    // 사용자가 올린 파일명
     private String uploadFileName;
+    // 실제 서버에서 관리되는 파일명
     private String storeFileName;
 
     public UploadFile(String uploadFileName, String storeFileName) {
