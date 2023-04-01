@@ -57,6 +57,9 @@ public class ItemController {
         return "redirect:/items/{itemId}";
     }
 
+    // Post형식인 saveItem메소드가 return을 /items/{itemId}로 바로 던져줘서
+    // @GetMapping("/items/{id}")을 통해 가져와서 item.getId()에 해당하는
+    // 페이지를 보여준다.
     @GetMapping("/items/{id}")
     public String items(@PathVariable Long id, Model model) {
         Item item = itemRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("NOT FOUND ITEM :" + id));
@@ -65,16 +68,17 @@ public class ItemController {
     }
 
 
-    // 첨부파일을 누르면 다운을 받을 수 있게 하려면
-    // 이 메소드를 작성해야 한다.
+    // 이미지가 보이게 하려면 이 메소드 작성
     @ResponseBody
     @GetMapping("/images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
         // "file:C:/upload/file/xxxxxxxx.png" 이런식으로 되는데
         // 여기서 x는 파일마다 다르므로 임시로 x라고 표시함
+        // 그러면 UrlResource가 찾아온다.
         return new UrlResource("file:" + fileStore.getFullPath(filename));
     }
 
+    // 첨부 파일 다운로드
     @GetMapping("/attach/{itemId}")
     public ResponseEntity<Resource> downloadAttach(@PathVariable Long itemId) throws MalformedURLException {
         Item item = itemRepository.findById(itemId)
