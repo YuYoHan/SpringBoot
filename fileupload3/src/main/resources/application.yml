@@ -1,0 +1,26 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 30MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/web0315
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+
+file:
+  dir: c:/upload/file/
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+mybatis:
+  type-aliases-package: com.example.fileupload3.mapper
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
