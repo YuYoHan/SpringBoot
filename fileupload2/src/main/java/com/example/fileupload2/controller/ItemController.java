@@ -64,9 +64,14 @@ public class ItemController {
         return "item-view";
     }
 
+
+    // 첨부파일을 누르면 다운을 받을 수 있게 하려면
+    // 이 메소드를 작성해야 한다.
     @ResponseBody
     @GetMapping("/images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
+        // "file:C:/upload/file/xxxxxxxx.png" 이런식으로 되는데
+        // 여기서 x는 파일마다 다르므로 임시로 x라고 표시함
         return new UrlResource("file:" + fileStore.getFullPath(filename));
     }
 
