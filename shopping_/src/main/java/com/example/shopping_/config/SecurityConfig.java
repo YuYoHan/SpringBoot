@@ -1,6 +1,8 @@
 package com.example.shopping_.config;
 
 import com.example.shopping_.service.MemberService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +23,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
+@NoArgsConstructor
 public class SecurityConfig{
 
     @Autowired
