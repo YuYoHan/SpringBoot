@@ -22,5 +22,10 @@ public class HelloServlet extends HttpServlet {
         // 쿼리 파라미터 조회
         String username = req.getParameter("username");
         System.out.println("username = " + username);
+
+        resp.setContentType("text/plain");
+        resp.setCharacterEncoding("utf-8");
+        // HTTP body에 담김
+        resp.getWriter().write("hello " + username);
     }
 }
